@@ -50,7 +50,7 @@ export default function SignIn(props) {
    
   </Form.Group>
 
-  <Button variant="primary">Create my </Button>
+  <Button variant="primary">Create my account </Button>
   
 </Form>
   </Card.Body>
