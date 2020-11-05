@@ -1,8 +1,11 @@
+
 import './App.css';
 import Header from './Component/header/header'
 import Jumber from './Component/jumbotron/jumbotron'
 import Projects from './Component/projects/projects'
 import Ues from './Component/sectionUse/sectionUse'
+import ListProject from './store/projects/listproject/list-project';
+import React from "react";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import store from "./store/index";
@@ -11,8 +14,9 @@ function App() {
     <>
    
     <Provider store={store}>
+
     <Router>
-   <Header/>
+    <Header/>
     <Switch>
             <Route
               path="/"
@@ -21,12 +25,14 @@ function App() {
                 <>
                 <Jumber/>
                 <Ues/>
+                <ListProject/>
                 </>
               )}
             />
             <Route path="/projects" component={Projects} />
           </Switch>
         </Router>
+
     </Provider>
   
     </>

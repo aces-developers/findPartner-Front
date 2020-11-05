@@ -12,6 +12,7 @@ const projects = createSlice({
     },
   },
 });
+
 export const loadProjects = () => async (dispatch, getState) => {
     axios
       .get("https://as-findpartner.herokuapp.com/allprojects")
@@ -25,8 +26,9 @@ export const loadProjects = () => async (dispatch, getState) => {
         console.log(error);
       });
   };
-      
-    
+
+export const {  setProjects } = projects.actions;
+
 
   export const handleSearch = (q,search) => async (dispatch, getState) => {
     axios
