@@ -22,7 +22,6 @@ export default function SignIn(props) {
   <Card.Body>
   <Form>
   
-  <Button variant="primary">Continue with LinkedIn</Button>
 
   <Form.Group controlId="formBasicEmail" >
   <Form.Label>Name</Form.Label>
@@ -30,20 +29,20 @@ export default function SignIn(props) {
   <Form.Label>Create Password</Form.Label>
     <Form.Control type="password" placeholder="password" className="inputs"/>
     <Form.Label>Location</Form.Label>
-    <Form.Control as="select" custom className="inputs">
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-      <option>4</option>
-      <option>5</option>
-      </Form.Control>
+    <Form.Control type="text" placeholder=" City-Country" className="inputs"/>
+
     <Form.Label>Category</Form.Label>
     <Form.Control as="select" custom className="inputs">
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-      <option>4</option>
-      <option>5</option>
+      <option>Engineering</option>
+      <option>Arts</option>
+      <option>Business</option>
+      <option>Communications</option>
+      <option>Community</option>
+      <option>Education</option>
+      <option>Science</option>
+      <option>Farming</option>
+      <option>Health</option>
+      <option>IT</option>
       </Form.Control>
           <Form.Label>Skills</Form.Label>
     <Form.Control type="password" placeholder="password" className="inputs"/>
