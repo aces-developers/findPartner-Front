@@ -73,10 +73,10 @@ export default function Header(props) {
               </Nav.Link>
             </Nav>
             <Nav.Link className="login">    
-                    <NavLink to="/SignIn"> Sign in  </NavLink>
+                    <Link to="/SignIn"> Sign in  </Link>
             </Nav.Link>
             <Button variant="flat">    
-                            <NavLink to="/SignUp">  SignUp </NavLink>
+                            <Link to="/SignUp">  SignUp </Link>
                               </Button>
           </Navbar.Collapse>
         </Container>
