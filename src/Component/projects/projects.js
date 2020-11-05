@@ -11,7 +11,6 @@ function Project(props) {
   const [search, setsearch] = useState("title");
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log("hellllllllo", q);
     const load = async () => {
       await dispatch(handleSearch(q, search));
     };
