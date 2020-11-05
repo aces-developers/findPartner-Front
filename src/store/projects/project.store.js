@@ -35,7 +35,7 @@ export const loadProjects = () => async (dispatch, getState) => {
 export const handleSearch = (q, search) => async (dispatch, getState) => {
   axios
     .get(
-      `https://as-findpartner.herokuapp.com/allprojects?q=${q}&search=${search}`
+      `https://as-findpartner.herokuapp.com/searchprojects?q=${q}&search=${search}`
     )
     .then((res) => {
       // handle success
