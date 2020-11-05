@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Card, Button, Row, Col, Image } from "react-bootstrap";
 
 const Cards = (props) => {
+
   return (
     <>
       <Card style={{ width: "25rem" }}>

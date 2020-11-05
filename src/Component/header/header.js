@@ -72,8 +72,12 @@ export default function Header(props) {
                 ABOUT US
               </Nav.Link>
             </Nav>
-            <Nav.Link className="login">LOG IN </Nav.Link>
-            <Button variant="flat">SIGNUP</Button>
+            <Nav.Link className="login">    
+                    <NavLink to="/SignIn"> Sign in  </NavLink>
+            </Nav.Link>
+            <Button variant="flat">    
+                            <NavLink to="/SignUp">  SignUp </NavLink>
+                              </Button>
           </Navbar.Collapse>
         </Container>
       </Navbar>
