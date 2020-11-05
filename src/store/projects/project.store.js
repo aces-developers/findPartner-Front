@@ -1,38 +1,45 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-
 const projects = createSlice({
   name: "projects",
   initialState: {
     projects: [],
-    
   },
   reducers: {
-    updateActive(state, action) {
-      state.active =  action.payload;
-    },
-    setCategories(state, action) {
+    setProjects(state, action) {
       console.log('action =====>', action);
-        state.categories = action.payload ;
+        state.projects = action.payload ;
     },
   },
 });
-
-export const loadCategories = () => async (dispatch, getState) => {
+export const loadProjects = () => async (dispatch, getState) => {
     axios
-      .get("https://as-app-server.herokuapp.com/api/v1/categories")
+      .get("https://as-findpartner.herokuapp.com/allprojects")
       .then((res) => {
         // handle success
-        console.log(res);
-          dispatch(setCategories(res.data.results));
+        console.log(' handle success-->',res.data);
+          dispatch(setProjects(res.data));
       })
       .catch((error) => {
         // handle error
         console.log(error);
       });
   };
-  
+      
+    
 
-export const { updateActive, setCategories } = projects.actions;
-
+  export const handleSearch = (q,search) => async (dispatch, getState) => {
+    axios
+      .get(`https://as-findpartner.herokuapp.com/allprojects?q=${q}&search=${search}`)
+      .then((res) => {
+        // handle success
+        console.log(' handle success-->',res.data);
+          dispatch(setProjects(res.data));
+      })
+      .catch((error) => {
+        // handle error
+        console.log(error);
+      });
+  };
+export const {  setProjects } = projects.actions;
 export default projects.reducer;
