@@ -1,10 +1,10 @@
 
-import './App.css';
-import Header from './Component/header/header'
-import Jumber from './Component/jumbotron/jumbotron'
-import Projects from './Component/projects/projects'
-import Ues from './Component/sectionUse/sectionUse'
-import ListProject from './store/projects/listproject/list-projects';
+import "./App.css";
+import Header from "./Component/header/header";
+import Jumber from "./Component/jumbotron/jumbotron";
+import Projects from "./Component/projects/projects";
+import Ues from "./Component/sectionUse/sectionUse";
+import ListProject from "./store/projects/listproject/list-projects";
 import React from "react";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -16,20 +16,18 @@ import SignIn from './Component/singIn/signIn'
 function App() {
   return (
     <>
-   
-    <Provider store={store}>
-
-    <Router>
-    <Header/>
-    <Switch>
+      <Provider store={store}>
+        <Router>
+          <Header />
+          <Switch>
             <Route
               path="/"
               exact
               render={(props) => (
                 <>
-                <Jumber/>
-                <Ues/>
-                <ListProject/>
+                  <Jumber />
+                  <Ues />
+                  <ListProject />
                 </>
               )}
             />
@@ -38,9 +36,7 @@ function App() {
             <Route path="/SignUp" component={SignUp} />
           </Switch>
         </Router>
-
-    </Provider>
-  
+      </Provider>
     </>
   );
 }
