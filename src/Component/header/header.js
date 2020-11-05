@@ -1,5 +1,7 @@
+
 import React from "react";
 import { Container, Navbar, Nav, Form, Button } from "react-bootstrap";
+import {NavLink} from 'react-router-dom'
 import findPartner from "./findPartner2.png";
 
 export default function Header(props) {
@@ -54,13 +56,13 @@ export default function Header(props) {
       <Navbar className="navbar" expand="lg">
         <Container>
           <Navbar.Brand href="#home">
-            <img className="logo" src={findPartner}></img>
+          <NavLink to="/">  <img className="logo" src={findPartner}/> </NavLink>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto ml-4 links ">
               <Nav.Link className="mr-4" href="#home">
-                BROWSE PROJECTS
+                <NavLink to="/projects">BROWSE PROJECT</NavLink>
               </Nav.Link>
               <Nav.Link className="mr-4" href="#features">
                 BROWSE POTENTIAL PARTNERS
@@ -76,4 +78,5 @@ export default function Header(props) {
       </Navbar>
     </>
   );
+
 }
