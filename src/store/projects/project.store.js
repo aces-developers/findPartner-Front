@@ -43,5 +43,5 @@ export const {  setProjects } = projects.actions;
         console.log(error);
       });
   };
-export const {  setProjects } = projects.actions;
+//export const {  setProjects } = projects.actions;
 export default projects.reducer;
