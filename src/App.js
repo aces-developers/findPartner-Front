@@ -4,7 +4,7 @@ import Header from "./Component/header/header";
 import Jumber from "./Component/jumbotron/jumbotron";
 import Projects from "./Component/projects/projects";
 import Ues from "./Component/sectionUse/sectionUse";
-import ListProject from "./store/projects/listproject/list-projects";
+import ListProject from "./Component/projects/list-projects";
 import React from "react";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
