@@ -1,6 +1,6 @@
 
 import React from "react";
-import { Container, Navbar, Nav, Form, Button } from "react-bootstrap";
+import { Container, Navbar, Nav, Form , Button } from "react-bootstrap";
 import {NavLink} from 'react-router-dom'
 import findPartner from "./findPartner2.png";
 
