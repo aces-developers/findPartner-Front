@@ -1,27 +1,27 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const projects = createSlice({
-  name: "projects",
+const users = createSlice({
+  name: "users",
   initialState: {
-    projects: [],
+    users: [],
     
   },
   reducers: {
-    setProjects(state, action) {
+    setUsers(state, action) {
       console.log('action =====>', action);
-        state.projects = action.payload ;
+        state.users = action.payload ;
     },
   },
 });
 
-export const loadProjects = () => async (dispatch, getState) => {
+export const loadUsers = () => async (dispatch, getState) => {
     axios
-      .get("https://as-findpartner.herokuapp.com/allprojects")
+      .get("https://as-findpartner.herokuapp.com/users")
       .then((res) => {
         // handle success
         console.log(' handle success-->',res.data);
-          dispatch(setProjects(res.data));
+          dispatch(setUsers(res.data));
       })
       .catch((error) => {
         // handle error
@@ -30,6 +30,6 @@ export const loadProjects = () => async (dispatch, getState) => {
   };
   
 
-export const {  setProjects } = projects.actions;
+export const { setUsers } = users.actions;
 
-export default projects.reducer;
+export default users.reducer;

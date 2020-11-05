@@ -1,19 +1,22 @@
-import "./App.css";
+
+import './App.css';
+import Header from './Component/header/header'
+import Jumber from './Component/jumbotron/jumbotron'
+import Ues from './Component/sectionUse/sectionUse'
+import ListProject from './store/projects/listproject/list-project';
 import React from "react";
-import Header from "./Component/header/header";
-import Jumber from "./Component/jumbotron/jumbotron";
-import Ues from "./Component/sectionUse/sectionUse";
 import { Provider } from "react-redux";
 import store from "./store/";
 function App() {
   return (
-    <div className="App">
-      <Provider store={store}>
-        <Header />
-        <Jumber />
-        <Ues />
-      </Provider>
-    </div>
+    <>
+    <Provider store={store}>
+    <Header/>
+    <Jumber/>
+    <Ues/>
+    <ListProject/>
+    </Provider>
+    </>
   );
 }
 
