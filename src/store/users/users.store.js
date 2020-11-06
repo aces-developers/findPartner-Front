@@ -9,12 +9,12 @@ const users = createSlice({
       token:null,
       user:{},
     }
-    
+  
   },
   reducers: {
     setUsers(state, action) {
-      console.log('action =====>', action);
-        state.users = action.payload ;
+      console.log("action =====>", action);
+      state.users = action.payload;
     },
     setAccount(state, action) {
       console.log('setAccount =====>', action);
