@@ -11,6 +11,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import store from "./store/index";
 import SignUp from './Component/signUp/signUp'
 import SignIn from './Component/singIn/signIn'
+import AboutUs from './Component/about/about'
+import Footer from './Component/footer/footer'
 
 
 function App() {
@@ -34,7 +36,9 @@ function App() {
             <Route path="/projects" component={Projects} />
             <Route path="/SignIn" component={SignIn} />
             <Route path="/SignUp" component={SignUp} />
+            <Route path="/AboutUs" component={AboutUs} />
           </Switch>
+          <Footer/>
         </Router>
       </Provider>
     </>
