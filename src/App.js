@@ -8,6 +8,7 @@ import React from "react";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import store from "./store/index";
+import projectForm from "./Component/newproject/project-form";
 function App() {
   return (
     <>
@@ -27,6 +28,7 @@ function App() {
               )}
             />
             <Route path="/projects" component={Projects} />
+            <Route path="/newprojects" component={projectForm} />
           </Switch>
         </Router>
       </Provider>

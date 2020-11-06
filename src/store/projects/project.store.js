@@ -5,6 +5,7 @@ const projects = createSlice({
   initialState: {
     projects: [],
     searchResult: [],
+    newproject:[],
   },
   reducers: {
     setProjects(state, action) {
@@ -14,6 +15,10 @@ const projects = createSlice({
     setSearchResult(state, action) {
       console.log("setSearchResults =====>", action);
       state.searchResult = action.payload;
+    },
+    setNewProject(state, action) {
+      console.log("setNewProject =====>", action);
+      state.newproject = action.payload;
     },
   },
 });
@@ -36,6 +41,34 @@ export const handleSearch = (q, search) => async (dispatch, getState) => {
   axios
     .get(
       `https://as-findpartner.herokuapp.com/searchprojects?q=${q}&search=${search}`
+    )
+    .then((res) => {
+      // handle success
+      console.log(" handleSearch success-->", res.data);
+      dispatch(setSearchResult(res.data));
+    })
+    .catch((error) => {
+      // handle error
+      console.log(error);
+    });
+};
+export const handlepost = (bod) => async (dispatch, getState) => {
+
+
+
+  const config = {
+    headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhpZGF5YS1TeWFtIiwiaWF0IjoxNjA0NjgxMjUxfQ.1CFsQH2HWGV1cQEPA1pNKZ4hXesfL1YUN5-xNHPxEVE` }
+    // headers: { Authorization: `Bearer ${token}` }
+};
+
+const bodyParameters = bod
+  
+;
+  axios
+    .post(
+      `https://as-findpartner.herokuapp.com/newproject`,
+      bodyParameters,
+      config
     )
     .then((res) => {
       // handle success
