@@ -1,13 +1,18 @@
+
 import "./App.css";
 import Header from "./Component/header/header";
 import Jumber from "./Component/jumbotron/jumbotron";
 import Projects from "./Component/projects/projects";
 import Ues from "./Component/sectionUse/sectionUse";
-import ListProject from "./store/projects/listproject/list-projects";
+import ListProject from "./Component/projects/list-projects";
 import React from "react";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import store from "./store/index";
+import SignUp from './Component/signUp/signUp'
+import SignIn from './Component/singIn/signIn'
+
+
 function App() {
   return (
     <>
@@ -27,6 +32,8 @@ function App() {
               )}
             />
             <Route path="/projects" component={Projects} />
+            <Route path="/SignIn" component={SignIn} />
+            <Route path="/SignUp" component={SignUp} />
           </Switch>
         </Router>
       </Provider>

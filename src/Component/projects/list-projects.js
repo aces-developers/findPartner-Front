@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import { loadProjects } from "../project.store";
+import { loadProjects } from "../../store/projects/project.store";
 import { connect, useDispatch } from "react-redux";
-import Card from '../card/projectcard';
+import Card from '../projects/p-Card';
 const Projects = (props) => {
 
   const dispatch = useDispatch();

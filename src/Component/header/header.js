@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Navbar, Nav, Form, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { NavLink,Link } from "react-router-dom";
 import findPartner from "./findPartner2.png";
 
 export default function Header(props) {
@@ -87,8 +87,12 @@ export default function Header(props) {
                 ABOUT US
               </Nav.Link>
             </Nav>
-            <Nav.Link className="login">LOG IN </Nav.Link>
-            <Button variant="flat">SIGNUP</Button>
+            <Nav.Link className="login">    
+                    <Link to="/SignIn"> Sign in  </Link>
+            </Nav.Link>
+            <Button variant="flat">    
+                            <Link to="/SignUp">  SignUp </Link>
+                              </Button>
           </Navbar.Collapse>
         </Container>
       </Navbar>
