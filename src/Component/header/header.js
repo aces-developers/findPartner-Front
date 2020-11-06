@@ -4,6 +4,15 @@ import { NavLink,Link } from "react-router-dom";
 import findPartner from "./findPartner2.png";
 
 export default function Header(props) {
+  const styles = {
+    routeLink: {
+      textDecoration: "none",
+      color: "#333",
+      "&:hover": {
+        color: "#888",
+      },
+    },
+  };
   return (
     <>
       <style type="text/css">
@@ -22,6 +31,7 @@ export default function Header(props) {
     .links{
      font-size: 11pt;
     }
+    
 
     .login{
      color: #333;
@@ -48,6 +58,9 @@ export default function Header(props) {
         border: 1px solid #F77D0E;
         color: #F77D0E;
       }
+      
+
+     
     
     `}
       </style>
@@ -63,7 +76,9 @@ export default function Header(props) {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto ml-4 links ">
               <Nav.Link className="mr-4" href="#home">
-                <Link to="/projects">BROWSE PROJECT</Link>
+                <Link style={styles.routeLink} to="/projects">
+                  BROWSE PROJECT
+                </Link>
               </Nav.Link>
               <Nav.Link className="mr-4" href="#features">
                 BROWSE POTENTIAL PARTNERS
@@ -73,10 +88,10 @@ export default function Header(props) {
               </Nav.Link>
             </Nav>
             <Nav.Link className="login">    
-                    <NavLink to="/SignIn"> Sign in  </NavLink>
+                    <Link to="/SignIn"> Sign in  </Link>
             </Nav.Link>
             <Button variant="flat">    
-                            <NavLink to="/SignUp">  SignUp </NavLink>
+                            <Link to="/SignUp">  SignUp </Link>
                               </Button>
           </Navbar.Collapse>
         </Container>
