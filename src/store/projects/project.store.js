@@ -6,6 +6,7 @@ const projects = createSlice({
     projects: [],
     searchResult: [],
     newproject:[],
+    Modal: false
   },
   reducers: {
     setProjects(state, action) {
@@ -20,10 +21,27 @@ const projects = createSlice({
       console.log("setNewProject =====>", action);
       state.newproject = action.payload;
     },
+    setModal(state, action) {
+      console.log("setNewProject =====>", action);
+      state.Modal = action.payload;
+    },
   },
 });
 
 export const loadProjects = () => async (dispatch, getState) => {
+  axios
+    .get("https://as-findpartner.herokuapp.com/allprojects")
+    .then((res) => {
+      // handle success
+      console.log(" loadProjects success-->", res.data);
+      dispatch(setProjects(res.data));
+    })
+    .catch((error) => {
+      // handle error
+      console.log(error);
+    });
+};
+export const loadProjectsById = () => async (dispatch, getState) => {
   axios
     .get("https://as-findpartner.herokuapp.com/allprojects")
     .then((res) => {
@@ -57,7 +75,7 @@ export const handlepost = (bod) => async (dispatch, getState) => {
 
 
   const config = {
-    headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhpZGF5YS1TeWFtIiwiaWF0IjoxNjA0NjgxMjUxfQ.1CFsQH2HWGV1cQEPA1pNKZ4hXesfL1YUN5-xNHPxEVE` }
+    headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhpZGF5YS1TeWFtIiwiaWF0IjoxNjA0Njg5NTgzfQ.08VecrnTBaSvjG-UX5eC8QxYSMaUW64YL6-YkISQ3sY` }
     // headers: { Authorization: `Bearer ${token}` }
 };
 
@@ -72,13 +90,14 @@ const bodyParameters = bod
     )
     .then((res) => {
       // handle success
+      if(res.data){dispatch(setModal(true))}
       console.log(" handleSearch success-->", res.data);
-      dispatch(setSearchResult(res.data));
+      dispatch(setNewProject(res.data));
     })
     .catch((error) => {
       // handle error
       console.log(error);
     });
 };
-export const { setProjects, setSearchResult } = projects.actions;
+export const { setProjects, setSearchResult,setNewProject,setModal} = projects.actions;
 export default projects.reducer;

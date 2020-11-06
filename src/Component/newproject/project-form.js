@@ -1,19 +1,20 @@
 import React from 'react'
-import { useState} from "react";
-import { connect,useDispatch} from 'react-redux'
+import { useState } from "react";
+import { connect, useDispatch } from 'react-redux'
 import { handlepost } from "../../store/projects/project.store";
-import { Form, Card,  Col, Button,DropdownButton,Dropdown} from 'react-bootstrap'
+import { Form, Card, Col, Button, DropdownButton, Dropdown } from 'react-bootstrap'
+import ProjectModal from '../modal/modal'
 
-function ProjectForm() {
+function ProjectForm(props) {
 
     const dispatch = useDispatch()
 
-    const [title, setTitle] = useState('TITLE')
-    const [desc, setdesc] = useState('cool')
-    const [location, setlocation] = useState('THE SHADOWLANDS')
-    const [skills, setskills] = useState('nothing')
-    const [budget, setbudget] = useState('5')
-    const [category, setcategory] = useState('IT')
+    const [title, setTitle] = useState('')
+    const [desc, setdesc] = useState('')
+    const [location, setlocation] = useState('Choose a loaction')
+    const [skills, setskills] = useState('')
+    const [budget, setbudget] = useState('')
+    const [category, setcategory] = useState('Choose a Categoty')
 
     const onChangeDescField = (e) => {
         console.log(e);
@@ -25,12 +26,12 @@ function ProjectForm() {
         setskills(e.target.value);
         console.log("skill", skills);
     };
-    const onFieldCategory =(e)=>{
+    const onFieldCategory = (e) => {
         console.log(e);
         setcategory(e);
         console.log("category", category);
     }
-    const onFieldLocation =(e)=>{
+    const onFieldLocation = (e) => {
         console.log(e);
         setlocation(e);
         console.log("location", location);
@@ -41,7 +42,7 @@ function ProjectForm() {
         setTitle(e.target.value);
         console.log("title", title);
     };
-    
+
     const onChangeBudgetField = (e) => {
         console.log(e);
         setbudget(e.target.value);
@@ -51,13 +52,10 @@ function ProjectForm() {
         e.preventDefault();
         console.log("event ->>>>", e);
         dispatch(handlepost({
-   
             "title": title,
             "description": desc,
             "category": category,
-            "budget":  budget +"$",
-            "_ownerId": "5fa3bb8709ecfe0235ef55eb",
-            "_ownerName": "we will have it not hard coded soon",
+            "budget": budget + "$",
             "isopen": true
         }));
     };
@@ -66,9 +64,10 @@ function ProjectForm() {
 
     return (
         <>
-            <Card>
+            {console.log(props.Modal)}
 
-                <Form onSubmit={handleNewPost}>
+            <Card>
+                <Form onSubmit={handleNewPost} >
                     <Form.Group>
                         <Form.Text>
                             New Project
@@ -76,18 +75,18 @@ function ProjectForm() {
                     </Form.Group>
                     <Form.Group controlId="exampleForm.ControlInput1">
                         <Form.Label>Project name</Form.Label>
-                        <Form.Control type="string" placeholder="Project name" onChange={onChangeTitleField}/>
+                        <Form.Control required='true' type="string" placeholder="Project name" onChange={onChangeTitleField} />
                     </Form.Group>
 
                     <Form.Group controlId="exampleForm.ControlTextarea1">
-                        <Form.Label>Description</Form.Label>
-                        <Form.Control as="textarea" rows={4}  onChange={onChangeDescField}/>
+                        <Form.Label  > Description</Form.Label>
+                        <Form.Control required='true' as="textarea" rows={4} onChange={onChangeDescField} />
                     </Form.Group>
                     <Form.Group>
                         <Form.Row>
                             <Form.Group as={Col} controlId="formGrid">
                                 <Form.Label>Category</Form.Label>
-                                <DropdownButton onSelect={onFieldCategory} id="dropdown-basic-button" name="category" title="Categories">
+                                <DropdownButton required='true' onSelect={onFieldCategory} id="dropdown-basic-button" name="category" title={category}>
                                     <Dropdown.Item eventKey='it' >IT</Dropdown.Item>
                                     <Dropdown.Item eventKey='engineering'>Engineering</Dropdown.Item>
                                     <Dropdown.Item eventKey='arts'>Arts</Dropdown.Item>
@@ -95,14 +94,14 @@ function ProjectForm() {
                             </Form.Group>
 
                             <Form.Group as={Col} controlId="formGrid">
-                                <Form.Label>Skills needed</Form.Label>
-                                <Form.Control onChange={onChangeSkillField} type="string" placeholder="Skills" />
+                                <Form.Label  >Skills needed</Form.Label>
+                                <Form.Control required='true' onChange={onChangeSkillField} type="string" placeholder="Skills" />
                             </Form.Group>
                         </Form.Row>
                         <Form.Row>
-                        <Form.Group  as={Col} controlId="formGrid">
+                            <Form.Group as={Col} controlId="formGrid">
                                 <Form.Label>Location</Form.Label>
-                                <DropdownButton  onSelect={onFieldLocation} id="dropdown-basic-button" name="loaction" title="Location">
+                                <DropdownButton onSelect={onFieldLocation} id="dropdown-basic-button" name="loaction" title={location}>
                                     <Dropdown.Item eventKey='jordan' >jordan</Dropdown.Item>
                                     <Dropdown.Item eventKey='gaza'>gaza</Dropdown.Item>
                                     <Dropdown.Item eventKey='Neverland'>Neverland</Dropdown.Item>
@@ -110,18 +109,22 @@ function ProjectForm() {
                             </Form.Group>
 
                             <Form.Group as={Col} controlId="formGrid">
-                                <Form.Label>Budget</Form.Label>
-                                <Form.Control type="string" placeholder="budget" onChange={onChangeBudgetField} />
+                                <Form.Label >Budget</Form.Label>
+                                <Form.Control required='true' type="string" placeholder="budget" onChange={onChangeBudgetField} />
                             </Form.Group>
                         </Form.Row>
                     </Form.Group>
                     <Form.Row>
-                        <Button type="submit">Post</Button>
+
+
+                        <Button type="submit"> Post</Button>
                     </Form.Row>
 
                 </Form>
             </Card>
-
+            <div style={{ visibility: `hidden` }} >
+                <ProjectModal />
+            </div>
         </>
     )
 }
@@ -129,5 +132,6 @@ function ProjectForm() {
 
 const mapStateToProps = (state) => ({
     newproject: state.projects.newproject,
+    Modal: state.projects.Modal
 });
 export default connect(mapStateToProps)(ProjectForm);
