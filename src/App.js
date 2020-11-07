@@ -11,14 +11,15 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import store from "./store/index";
 import SignUp from './Component/signUp/signUp'
 import SignIn from './Component/singIn/signIn'
-
+import Users from "./Component/users/user";
+import CompleteSignup from './Component/accountInfo/accountInfo'
 
 function App() {
   return (
     <>
       <Provider store={store}>
         <Router>
-          <Header />
+          <Header/>
           <Switch>
             <Route
               path="/"
@@ -32,8 +33,10 @@ function App() {
               )}
             />
             <Route path="/projects" component={Projects} />
+          {/* <Route path="/users" component={Users} /> */}
             <Route path="/SignIn" component={SignIn} />
             <Route path="/SignUp" component={SignUp} />
+            <Route path="/Regisration" component={CompleteSignup} />
           </Switch>
         </Router>
       </Provider>

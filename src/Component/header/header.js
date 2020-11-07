@@ -2,8 +2,15 @@ import React from "react";
 import { Container, Navbar, Nav, Form, Button } from "react-bootstrap";
 import { NavLink,Link } from "react-router-dom";
 import findPartner from "./findPartner2.png";
+import { connect, useDispatch } from "react-redux";
+import {  setMessage } from "../../store/users/users.store";
 
-export default function Header(props) {
+function Header(props) {
+  const dispatch= useDispatch();
+
+  const handleMessageState=()=>{
+    dispatch(setMessage(null))
+  }
   return (
     <>
       <style type="text/css">
@@ -76,7 +83,7 @@ export default function Header(props) {
                     <Link to="/SignIn"> Sign in  </Link>
             </Nav.Link>
             <Button variant="flat">    
-                            <Link to="/SignUp">  SignUp </Link>
+                            <Link to="/SignUp" onClick={handleMessageState}>  SignUp </Link>
                               </Button>
           </Navbar.Collapse>
         </Container>
@@ -84,3 +91,11 @@ export default function Header(props) {
     </>
   );
 }
+const mapStateToProps = (state) => ({
+  message: state.users.message,
+
+});
+
+
+export default connect(mapStateToProps)(Header);
+
