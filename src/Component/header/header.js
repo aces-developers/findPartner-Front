@@ -84,7 +84,7 @@ export default function Header(props) {
                 BROWSE POTENTIAL PARTNERS
               </Nav.Link>
               <Nav.Link className="mr-4" href="#pricing">
-                ABOUT US
+                  <Link to="/AboutUs">  ABOUT US </Link>
               </Nav.Link>
             </Nav>
             <Nav.Link className="login">    
