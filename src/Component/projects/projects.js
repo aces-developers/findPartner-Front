@@ -7,6 +7,7 @@ import PCard from "./p-Card";
 import Figure from "react-bootstrap/Figure";
 
 function Project(props) {
+
     const [q, setq] = useState("");
     const [search, setsearch] = useState("title");
     const dispatch = useDispatch();
@@ -15,6 +16,7 @@ function Project(props) {
         const load = async () => {
             await dispatch(handleSearch(q, search));
         };
+
 
         load();
     }, [dispatch]);

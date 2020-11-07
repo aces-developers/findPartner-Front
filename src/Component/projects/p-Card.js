@@ -7,7 +7,9 @@ export default function Project(props) {
         <Card.Body>
     <Card.Title>{props.Item.title}</Card.Title>
     <Card.Text>{props.Item._ownerName} </Card.Text>
+
     <Card.Text>{props.Item.category} </Card.Text>
+
             <Card.Text>
             {props.Item.description}
         </Card.Text>
