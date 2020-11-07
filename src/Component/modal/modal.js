@@ -18,7 +18,7 @@ function ProjectModal(props) {
   
         <Modal show={show} onHide={closeFun}>
           <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
+            <Modal.Title>SUCESS!!</Modal.Title>
           </Modal.Header>
           <Modal.Body>Project posted</Modal.Body>
           <Modal.Footer>
