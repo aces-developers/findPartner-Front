@@ -12,7 +12,7 @@ function Header(props) {
     dispatch(setMessage(null))
   }
 
-export default function Header(props) {
+ 
   const styles = {
     routeLink: {
       textDecoration: "none",
@@ -116,4 +116,3 @@ const mapStateToProps = (state) => ({
 
 
 export default connect(mapStateToProps)(Header);
-
