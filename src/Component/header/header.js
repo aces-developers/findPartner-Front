@@ -11,6 +11,18 @@ function Header(props) {
   const handleMessageState=()=>{
     dispatch(setMessage(null))
   }
+
+export default function Header(props) {
+  const styles = {
+    routeLink: {
+      textDecoration: "none",
+      color: "#333",
+      "&:hover": {
+        color: "#888",
+      },
+    },
+  };
+
   return (
     <>
       <style type="text/css">
@@ -29,6 +41,7 @@ function Header(props) {
     .links{
      font-size: 11pt;
     }
+    
 
     .login{
      color: #333;
@@ -55,6 +68,9 @@ function Header(props) {
         border: 1px solid #F77D0E;
         color: #F77D0E;
       }
+      
+
+     
     
     `}
       </style>
@@ -70,13 +86,15 @@ function Header(props) {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto ml-4 links ">
               <Nav.Link className="mr-4" href="#home">
-                <Link to="/projects">BROWSE PROJECT</Link>
+                <Link style={styles.routeLink} to="/projects">
+                  BROWSE PROJECT
+                </Link>
               </Nav.Link>
               <Nav.Link className="mr-4" href="#features">
                 BROWSE POTENTIAL PARTNERS
               </Nav.Link>
               <Nav.Link className="mr-4" href="#pricing">
-                ABOUT US
+                  <Link to="/AboutUs">  ABOUT US </Link>
               </Nav.Link>
             </Nav>
             <Nav.Link className="login">    

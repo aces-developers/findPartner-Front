@@ -1,3 +1,4 @@
+
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import {browserHistory} from 'react-router'
@@ -120,3 +121,4 @@ export const SignUp = (usersData) => async (dispatch, getState) => {
 export const {setIsValid, setMessage, setUsers, setAccount } = users.actions;
 
 export default users.reducer;
+

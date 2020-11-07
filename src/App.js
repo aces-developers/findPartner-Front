@@ -13,7 +13,8 @@ import SignUp from './Component/signUp/signUp'
 import SignIn from './Component/singIn/signIn'
 import Users from "./Component/users/user";
 import CompleteSignup from './Component/accountInfo/accountInfo'
-
+import AboutUs from './Component/about/about'
+import Footer from './Component/footer/footer'
 function App() {
   return (
     <>
@@ -37,7 +38,9 @@ function App() {
             <Route path="/SignIn" component={SignIn} />
             <Route path="/SignUp" component={SignUp} />
             <Route path="/Regisration" component={CompleteSignup} />
+            <Route path="/AboutUs" component={AboutUs} />
           </Switch>
+          <Footer/>
         </Router>
       </Provider>
     </>
