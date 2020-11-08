@@ -2,15 +2,22 @@ import React from "react";
 import { Card, Form, Button } from "react-bootstrap";
 import { SignIn } from "../../store/users/users.store";
 import { connect, useDispatch } from "react-redux";
+import { setSession } from "../../store/projects/project.store";
 
 function Signin(props) {
   const dispatch = useDispatch();
-  const handlesubmit = (e) => {
+  const handlesubmit = async (e) => {
     e.preventDefault();
     console.log("event ->>>>", e.target.username.value," ",e.target.password);
     let user={username: e.target.username.value,password:e.target.password.value}
-    dispatch(SignIn(user));
+    await dispatch(SignIn(user));
+    await dispatch(setSession(props.users.token))
+    setTimeout(() => {
+      props.history.push("./")
+    }, 2000);
   };
+  
+
 
  
   return (
@@ -56,6 +63,7 @@ function Signin(props) {
 
 const mapStateToProps = (state) => ({
   users: state.users.account,
+  projetcs: state.projects.sessionToken
 });
 
 
