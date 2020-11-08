@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { connect, useDispatch } from 'react-redux'
-import { Nav,Form } from "react-bootstrap"
+import { Nav, Form } from "react-bootstrap"
 import { Details } from "./details"
 import { Propsals } from './propsals'
+import {ModalSwitch} from './ModalSwitch'
+import {setModal} from "../../store/projects/project.store"
 
 
 
@@ -16,18 +18,28 @@ export const DetailedProject = (props) => {
             return <Propsals />
         }
     }
+    function Modals() {
+        if(props.Modal){
+            return <ModalSwitch />
+        }else return ( <></>)
+    }
 
     const [view, setview] = useState(true)
+    const dispatch = useDispatch()
+    const toggleEnabled = ()=>{ dispatch(setModal(true)) }
     const openDetails = () => { setview(true) }
     const openProposals = () => { setview(false) }
     return (
         <>
+        {console.log(props.Modal)}
             <h2>{props.match.params.id}</h2>
             <Form>
                 <Form.Check
                     type="switch"
                     id="custom-switch"
-                    label="Check this switch"
+                    label="open"
+                    // checked={this.state.settings.enabled}
+                    onChange={toggleEnabled}
                 />
             </Form>
             <Nav variant="pills" defaultActiveKey="/home">
@@ -43,9 +55,10 @@ export const DetailedProject = (props) => {
                   </Nav.Link>
                 </Nav.Item> */}
             </Nav>
-            
+
 
             <Page />
+            <Modals/>
         </>
     )
 }
@@ -54,6 +67,7 @@ export const DetailedProject = (props) => {
 
 const mapStateToProps = (state) => ({
     details: state.projects.projectDetails,
+    Modal:state.projects.Modal
 
 })
 
