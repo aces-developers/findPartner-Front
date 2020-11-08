@@ -57,7 +57,7 @@ function ProjectForm(props) {
             "category": category,
             "budget": budget + "$",
             "isopen": true
-        }));
+        },props.token));
     };
 
 
@@ -132,6 +132,7 @@ function ProjectForm(props) {
 
 const mapStateToProps = (state) => ({
     newproject: state.projects.newproject,
-    Modal: state.projects.Modal
+    Modal: state.projects.Modal,
+    token: state.projects.sessionToken
 });
 export default connect(mapStateToProps)(ProjectForm);

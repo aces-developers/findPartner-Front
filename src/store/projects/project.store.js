@@ -6,8 +6,9 @@ const projects = createSlice({
     projectData:null,
     projects: [],
     searchResult: [],
-    newproject: [],
-    Modal: false
+    newproject:[],
+    Modal: false,
+    sessionToken:''
   },
   reducers: {
     setprojectData(state, action) {
@@ -29,6 +30,10 @@ const projects = createSlice({
     setModal(state, action) {
       console.log("setNewProject =====>", action);
       state.Modal = action.payload;
+    },
+    setSession(state, action) {
+      console.log("setNewProject =====>", action);
+      state.sessionToken = action.payload;
     },
   },
 });
@@ -76,17 +81,15 @@ export const handleSearch = (q, search) => async (dispatch, getState) => {
       console.log(error);
     });
 };
-export const handlepost = (bod) => async (dispatch, getState) => {
-
-
+export const handlepost = (bod,token) => async (dispatch, getState) => {
 
   const config = {
-    headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhpZGF5YS1TeWFtIiwiaWF0IjoxNjA0Njg5NTgzfQ.08VecrnTBaSvjG-UX5eC8QxYSMaUW64YL6-YkISQ3sY` }
-    // headers: { Authorization: `Bearer ${token}` }
-  };
+    // headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhpZGF5YS1TeWFtIiwiaWF0IjoxNjA0Njg5NTgzfQ.08VecrnTBaSvjG-UX5eC8QxYSMaUW64YL6-YkISQ3sY` }
+    headers: { Authorization: `Bearer ${token}` }
+};
 
-  const bodyParameters = bod
-
+const bodyParameters = bod
+  
 
   axios
     .post(
@@ -151,4 +154,5 @@ export const getproject = (id) => async (dispatch, getState) => {
     });
 };
 export const {setprojectData, setProjects, setSearchResult, setNewProject, setModal } = projects.actions;
+
 export default projects.reducer;
