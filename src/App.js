@@ -19,9 +19,12 @@ import CompleteSignup from './Component/accountInfo/accountInfo'
 import AboutUs from './Component/about/about'
 import Footer from './Component/footer/footer'
 import Dashboard from './Component/dashboard/dashboard'
+import DetailedProject from './Component/detailedProject-owner/detailedProject'
 
 import {setAccount} from "./store/users/users.store"
 import useBeforeFirstRender from '../src/hooks/componentWillMount'
+import detailedProject from "./Component/detailedProject-owner/detailedProject";
+
 
 const MyComponent = () => { 
   const dispatch = useDispatch();
@@ -104,6 +107,7 @@ function AppWrapper() {
             <Route path="/SignUp" component={SignUp} />
             <Route path="/Regisration" component={CompleteSignup} />
             <Route path="/AboutUs" component={AboutUs} />
+            <Route path="/project" component={detailedProject} />
 
           </Switch>
           <Footer/>

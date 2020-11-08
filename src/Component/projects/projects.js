@@ -87,9 +87,9 @@ function Project(props) {
                         </div>
                     }
                 </Form>
-                {props.searchResult.map((item) => {
+                {props.searchResult.map((item,idx) => {
                     return (
-                        <div style={{ float: "left", margin: "30px", padding: "10px" }}>
+                        <div key={idx} style={{ float: "left", margin: "30px", padding: "10px" }}>
                             <PCard Item={item} />
                         </div>
                     );

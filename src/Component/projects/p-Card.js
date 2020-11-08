@@ -1,8 +1,21 @@
 import React from 'react'
+import {connect,useDispatch} from "react-redux"
 import { Card, Button, Row, Col, Image } from 'react-bootstrap'
-export default function Project(props) {
+import {setDetails} from "../../store/projects/project.store"
+import { Link, Redirect } from 'react-router-dom'
+ function Project(props) {
+
+    const dispatch = useDispatch()
+    
+    const GoToDetails = (id)=>{
+        id = props.Item._id
+        console.log(id)
+        dispatch(setDetails(props.Item))
+    
+    }
     return (
         <>
+
     <Card style={{ width: '25rem' }}>
         <Card.Body>
     <Card.Title>{props.Item.title}</Card.Title>
@@ -13,9 +26,16 @@ export default function Project(props) {
             <Card.Text>
             {props.Item.description}
         </Card.Text>
-            <Button variant="primary">Go somewhere</Button>
+            <Button   onClick={GoToDetails} variant="primary"><Link to={`/project/:${props.Item._id}`} >Details</Link></Button>
         </Card.Body>
     </Card>
     </>
     );
 }
+const mapStateToProps = (state) => ({
+    details: state.projects.projectDetails,
+})
+
+
+
+export default connect(mapStateToProps)(Project)

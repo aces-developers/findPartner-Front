@@ -6,6 +6,7 @@ const projects = createSlice({
     projects: [],
     searchResult: [],
     newproject:[],
+    projectDetails:[],
     Modal: false,
     sessionToken:''
   },
@@ -29,6 +30,10 @@ const projects = createSlice({
     setSession(state, action) {
       console.log("setNewProject =====>", action);
       state.sessionToken = action.payload;
+    },
+    setDetails(state, action) {
+      console.log("setDetails =====>", action);
+      state.projectDetails = action.payload;
     },
   },
 });
@@ -104,5 +109,5 @@ const bodyParameters = bod
       console.log(error);
     });
 };
-export const { setProjects, setSearchResult,setNewProject,setModal,setSession} = projects.actions;
+export const { setProjects, setSearchResult,setNewProject,setModal,setSession,setDetails} = projects.actions;
 export default projects.reducer;
