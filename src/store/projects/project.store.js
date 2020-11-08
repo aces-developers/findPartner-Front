@@ -159,6 +159,6 @@ export const getproject = (id) => async (dispatch, getState) => {
       console.log(error);
     });
 };
-export const {setprojectData, setProjects, setSearchResult, setNewProject, setModal } = projects.actions;
+export const {setprojectData, setProjects, setSearchResult, setNewProject, setModal, setSession } = projects.actions;
 // export const { setProjects, setSearchResult,setNewProject,setModal,setSession,setDetails} = projects.actions;
 export default projects.reducer;

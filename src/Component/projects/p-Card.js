@@ -1,11 +1,11 @@
 import React from 'react'
 
-import { Card, Button } from 'react-bootstrap'
+import { Card } from 'react-bootstrap'
 import { Link } from "react-router-dom";
-import { getproject } from "../../store/projects/project.store";
-import { connect, useDispatch } from "react-redux";
-import { Redirect } from "react-router";
-export default function Project(props) {
+// import { getproject } from "../../store/projects/project.store";
+import { connect } from "react-redux";
+// import { Redirect } from "react-router";
+export  function Project(props) {
     //const dispatch=useDispatch();
     
     return (
