@@ -18,6 +18,7 @@ import Users from "./Component/users/user";
 import CompleteSignup from './Component/accountInfo/accountInfo'
 import AboutUs from './Component/about/about'
 import Footer from './Component/footer/footer'
+import Detalis from  './Component/projects/projectDetails'
 import Dashboard from './Component/dashboard/dashboard'
 
 import {setAccount} from "./store/users/users.store"
@@ -60,10 +61,6 @@ const MyComponent = () => {
 // }
 function AppWrapper() {
   const states = store.getState();
-  
-   
- 
-  
   return (
     <> 
 
@@ -96,7 +93,7 @@ function AppWrapper() {
               )}
             />
             <Route path="/projects" component={Projects} />
-
+            <Route path="/detalis/:_id" component={Detalis} />
             <Route path="/newprojects" component={projectForm} />
 
           {/* <Route path="/users" component={Users} /> */}
