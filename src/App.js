@@ -18,7 +18,7 @@ import Users from "./Component/users/user";
 import CompleteSignup from './Component/accountInfo/accountInfo'
 import AboutUs from './Component/about/about'
 import Footer from './Component/footer/footer'
-
+import Detalis from  './Component/projects/projectDetails'
 function App() {
   return (
     <>
@@ -38,7 +38,7 @@ function App() {
               )}
             />
             <Route path="/projects" component={Projects} />
-
+            <Route path="/detalis/:_id" component={Detalis} />
             <Route path="/newprojects" component={projectForm} />
 
           {/* <Route path="/users" component={Users} /> */}
