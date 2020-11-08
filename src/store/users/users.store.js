@@ -74,7 +74,8 @@ export const SignIn = (userdata) => async (dispatch, getState) => {
       // handle success
       console.log(' handle success-->', res.data);
       dispatch(setAccount(res.data));
-      localStorage.setItem('token', res.data.token )
+      localStorage.setItem('account',JSON.stringify(res.data) )
+      localStorage.setItem('token',JSON.stringify(res.data.token) )
     })
     .catch((error) => {
       // handle error
