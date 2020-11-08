@@ -7,6 +7,7 @@ const projects = createSlice({
     projects: [],
     searchResult: [],
     newproject:[],
+    projectDetails:[],
     Modal: false,
     sessionToken:''
   },
@@ -34,6 +35,10 @@ const projects = createSlice({
     setSession(state, action) {
       console.log("setNewProject =====>", action);
       state.sessionToken = action.payload;
+    },
+    setDetails(state, action) {
+      console.log("setDetails =====>", action);
+      state.projectDetails = action.payload;
     },
   },
 });
@@ -109,6 +114,7 @@ const bodyParameters = bod
     });
 };
 
+
 export const apply = (id,propsal) => async (dispatch, getState) => {
 
   const config = {
@@ -154,5 +160,5 @@ export const getproject = (id) => async (dispatch, getState) => {
     });
 };
 export const {setprojectData, setProjects, setSearchResult, setNewProject, setModal } = projects.actions;
-
+// export const { setProjects, setSearchResult,setNewProject,setModal,setSession,setDetails} = projects.actions;
 export default projects.reducer;
