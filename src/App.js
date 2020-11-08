@@ -21,10 +21,10 @@ import Footer from './Component/footer/footer'
 import Detalis from  './Component/projects/projectDetails'
 import Dashboard from './Component/dashboard/dashboard'
 import DetailedProject from './Component/detailedProject-owner/detailedProject'
-
 import {setAccount} from "./store/users/users.store"
 import useBeforeFirstRender from '../src/hooks/componentWillMount'
 import detailedProject from "./Component/detailedProject-owner/detailedProject";
+import EditProject from "./Component/edit-project/EditProject";
 
 
 const MyComponent = () => { 
@@ -104,7 +104,8 @@ function AppWrapper() {
             <Route path="/SignUp" component={SignUp} />
             <Route path="/Regisration" component={CompleteSignup} />
             <Route path="/AboutUs" component={AboutUs} />
-            <Route path="/project" component={detailedProject} />
+            <Route path="/project/:id" component={detailedProject} />
+            <Route path="/edit/:id" component={EditProject} />
 
           </Switch>
           <Footer/>

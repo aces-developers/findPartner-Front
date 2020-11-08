@@ -11,9 +11,11 @@ const Schema = Yup.object().shape({
 });
 function Details(props) {
     const dispatch = useDispatch();
+    const { _id } = props.match.params
+    console.log(_id)
     useEffect(() => {
         const load = async () => {
-            await dispatch(getproject(props.location.state._id));
+            await dispatch(getproject(_id));
             console.log('props--->props', props)
         };
         load();
@@ -29,7 +31,6 @@ function Details(props) {
                         <Card.Body>
                             <Card.Title>{props.projectData[0].title}</Card.Title>
                             <Card.Text>{props.projectData[0]._ownerName} </Card.Text>
-
                             <Card.Text>{props.projectData[0].category} </Card.Text>
 
                             <Card.Text>

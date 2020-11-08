@@ -27,7 +27,7 @@ const users = createSlice({
       console.log('setAccount =====>', action);
       state.account.token = action.payload.token;
       state.account.username = action.payload.username;
-      state.account.userid = action.payload.username;
+      state.account.userid = action.payload.userid;
       
     },
     setMessage(state, action) {
