@@ -1,22 +1,17 @@
 import React from 'react'
-import {connect,useDispatch} from "react-redux"
-import { Card, Button, Row, Col, Image } from 'react-bootstrap'
-import {setDetails} from "../../store/projects/project.store"
-import { Link, Redirect } from 'react-router-dom'
- function Project(props) {
 
-    const dispatch = useDispatch()
+import { Card, Button } from 'react-bootstrap'
+import { Link } from "react-router-dom";
+import { getproject } from "../../store/projects/project.store";
+import { connect, useDispatch } from "react-redux";
+import { Redirect } from "react-router";
+export default function Project(props) {
+    //const dispatch=useDispatch();
     
-    const GoToDetails = (id)=>{
-        id = props.Item._id
-        console.log(id)
-        dispatch(setDetails(props.Item))
-    
-    }
     return (
         <>
+    <Card  style={{ width: '25rem' }}>
 
-    <Card style={{ width: '25rem' }}>
         <Card.Body>
     <Card.Title>{props.Item.title}</Card.Title>
     <Card.Text>{props.Item._ownerName} </Card.Text>
@@ -26,7 +21,10 @@ import { Link, Redirect } from 'react-router-dom'
             <Card.Text>
             {props.Item.description}
         </Card.Text>
-            <Button   onClick={GoToDetails} variant="primary"><Link to={`/project/:${props.Item._id}`} >Details</Link></Button>
+
+         <Card.Link > <Link  to= {{pathname:`/detalis/${props.Item._id}`,state: {_id: props.Item._id} }}> More Details </Link></Card.Link> 
+            
+
         </Card.Body>
     </Card>
     </>

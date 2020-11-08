@@ -10,6 +10,7 @@ const Projects = (props) => {
     const load = async () => {
       // setIsLoading(true);
       await dispatch(loadProjects());
+      console.log('dispatch')
       // setIsLoading(false);
     };
     load();

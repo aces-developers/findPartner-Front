@@ -3,6 +3,7 @@ import axios from "axios";
 const projects = createSlice({
   name: "projects",
   initialState: {
+    projectData:null,
     projects: [],
     searchResult: [],
     newproject:[],
@@ -11,6 +12,10 @@ const projects = createSlice({
     sessionToken:''
   },
   reducers: {
+    setprojectData(state, action) {
+      console.log("action =====>", action);
+      state.projectData = action.payload;
+    },
     setProjects(state, action) {
       console.log("action =====>", action);
       state.projects = action.payload;
@@ -83,8 +88,6 @@ export const handleSearch = (q, search) => async (dispatch, getState) => {
 };
 export const handlepost = (bod,token) => async (dispatch, getState) => {
 
-
-
   const config = {
     // headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhpZGF5YS1TeWFtIiwiaWF0IjoxNjA0Njg5NTgzfQ.08VecrnTBaSvjG-UX5eC8QxYSMaUW64YL6-YkISQ3sY` }
     headers: { Authorization: `Bearer ${token}` }
@@ -92,6 +95,7 @@ export const handlepost = (bod,token) => async (dispatch, getState) => {
 
 const bodyParameters = bod
   
+
   axios
     .post(
       `https://as-findpartner.herokuapp.com/newproject`,
@@ -100,7 +104,7 @@ const bodyParameters = bod
     )
     .then((res) => {
       // handle success
-      if(res.data){dispatch(setModal(true))}
+      if (res.data) { dispatch(setModal(true)) }
       console.log(" handleSearch success-->", res.data);
       dispatch(setNewProject(res.data));
     })
@@ -109,5 +113,52 @@ const bodyParameters = bod
       console.log(error);
     });
 };
-export const { setProjects, setSearchResult,setNewProject,setModal,setSession,setDetails} = projects.actions;
+
+
+export const apply = (id,propsal) => async (dispatch, getState) => {
+
+  const config = {
+    headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhpZGF5YS1TeWFtIiwiaWF0IjoxNjA0ODQ0Mzc3fQ.jxK0hLKrgT3bezPw2Iv5G2hqnvIMjaIkqR2CCTPrWoU` }
+
+  };
+ 
+  //const bodyParameters = bod
+
+  console.log('apply---> ', id,"---",propsal)
+  axios
+    .post(
+      `https://as-findpartner.herokuapp.com/apply/${id}`,
+      propsal,
+      config
+    )
+    .then((res) => {
+      // handle success
+     // if (res.data) { dispatch(setModal(true)) }
+      console.log(" apply success-->", res.data);
+      //dispatch(setNewProject(res.data));
+    })
+    .catch((error) => {
+      // handle error
+      console.log(error);
+    });
+};
+export const getproject = (id) => async (dispatch, getState) => {
+
+  console.log('getproject ---> ', id)
+  axios
+    .get(
+      `https://as-findpartner.herokuapp.com/project/${id}`)
+    .then((res) => {
+      // handle success
+     // if (res.data) { dispatch(setModal(true)) }
+      console.log(" getproject success-->", res.data);
+      dispatch(setprojectData(res.data));
+    })
+    .catch((error) => {
+      // handle error
+      console.log(error);
+    });
+};
+export const {setprojectData, setProjects, setSearchResult, setNewProject, setModal } = projects.actions;
+// export const { setProjects, setSearchResult,setNewProject,setModal,setSession,setDetails} = projects.actions;
 export default projects.reducer;
