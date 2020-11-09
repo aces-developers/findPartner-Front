@@ -9,11 +9,11 @@ import {Link} from "react-router-dom"
 
 export function ModalSwitch(props) {
     const dispatch = useDispatch()
-    console.log(props.props.projectData[0].isopen)
-    let obj =props.props.projectData[0]
-    console.log("isopen",props.props.account.token)
+    console.log(props.props.props.projectData[0].isopen)
+    let obj =props.props.props.projectData[0]
+    console.log("isopen",props.props.props.account.token)
     //  obj.isopen = !obj.isopen
-    
+    console.log('where Are we ',props)
     function editIsOpen(){
       const edit = async () => {
         await dispatch(editproject({
@@ -22,8 +22,8 @@ export function ModalSwitch(props) {
           "category": obj.category,
           "budget": obj.budget + "$",
           "isopen": !obj.isopen
-      },props.props.match.params.id,
-      props.props.account.token));
+      },props.props.props.match.params._id,
+      props.props.props.account.token));
         
     };
     edit();

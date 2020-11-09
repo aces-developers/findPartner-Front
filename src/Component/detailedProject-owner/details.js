@@ -37,11 +37,18 @@ export const Details = (props) => {
     )
 }
 
+
 const mapStateToProps = (state) => ({
     details: state.projects.projectDetails,
-    deleteModal:state.projects.deleteModal
+    Modal:state.projects.Modal,
+    projectData: state.projects.projectData,
+    deleteModal:state.projects.deleteModal,
+    account:state.users.account,
+    check:state.projects.check
     
+
 })
+
 
 
 

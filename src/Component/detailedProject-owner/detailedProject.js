@@ -13,7 +13,7 @@ export const DetailedProject = (props) => {
 
     function Page() {
         if (view) {
-            return <Details props={props}/>
+            return <Details props={props.props}/>
         }
         else {
             return <Propsals />
@@ -22,12 +22,12 @@ export const DetailedProject = (props) => {
     function Modals() {
         if(props.Modal){
             return <ModalSwitch props={props} />
-        }else if (props.deleteModal){
+        }else if (props.props.deleteModal){
             return <DeleteModal props={props} />
         }else return ( <></>)
     }
   
-    console.log('dm',props.deleteModal)
+    console.log('dm',props.props)
     // console.log('props.projectData[0].isopen',props.projectData[0].isopen)
 
     const [view, setview] = useState(true)
@@ -35,21 +35,21 @@ export const DetailedProject = (props) => {
     const toggleEnabled = ()=>{ dispatch(setModal(true)) }
     const openDetails = () => { setview(true) }
     const openProposals = () => { setview(false) }
-    const  _id  = props.match.params.id
+    const  _id  = props.props.match.params._id
     console.log(_id)
-    useEffect(() => {
-      const load = async () => {
-        await dispatch(getproject(_id));
-        console.log('props--->props', props)
+    // useEffect(() => {
+    //   const load = async () => {
+    //     await dispatch(getproject(_id));
+    //     console.log('props--->props', props.props)
         
-    };
-    load();
+    // };
+    // load();
 
-    }, [dispatch])
+    // }, [dispatch])
 
     return (
         <> 
-        {console.log('why me ',props.check)}
+        {console.log('why me ',props.props.check)}
         
             <Form>
                 <Form.Check

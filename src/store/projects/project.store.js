@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { Redirect } from "react-router-dom";
 const projects = createSlice({
   name: "projects",
   initialState: {
@@ -222,16 +223,23 @@ console.log('token',token)
       console.log(error);
     });
 };
-export const deleteProject = (id) => async (dispatch, getState) => {
+export const deleteProject = (body,token) => async (dispatch, getState) => {
+  let config = {
+    // headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhpZGF5YS1TeWFtIiwiaWF0IjoxNjA0Njg5NTgzfQ.08VecrnTBaSvjG-UX5eC8QxYSMaUW64YL6-YkISQ3sY` }
+    headers: { Authorization: `Bearer ${token}` },
+};
+  console.log('DELETE --->',token,)
+  console.log('del bod',body)
 
-  console.log('getproject ---> ', id)
   axios
-    .put(
-      `https://as-findpartner.herokuapp.com/project/${id}`)
+    .delete(
+      `https://as-findpartner.herokuapp.com/project/${body._id}?oid=${body._ownerId}`,
+      config)
     .then((res) => {
       // handle success
      
-      console.log(" getproject success-->", res.data);
+      console.log(" delproject success-->", res);
+    
       
     })
     .catch((error) => {
