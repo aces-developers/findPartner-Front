@@ -10,9 +10,11 @@ function ProjectModal(props) {
     const closeFun = ()=> dispatch(setModal(false))
     const handleClose = () =>  setShow(false);
     const handleShow = () => setShow(true);
+    let id = props.newproject._id
 
     return (
       <>
+      {console.log(props.newproject)}
         <Button  ref={props.Modal?handleShow:handleClose}  variant="primary" onClick={handleShow}>
         </Button>
   
@@ -26,7 +28,7 @@ function ProjectModal(props) {
             <Link  style={{color:"White"}} to="/">Back to Homepage</Link>
             </Button>
             <Button variant="primary" onClick={closeFun}>
-            <Link style={{color:"White"}} to="/project">View project</Link>
+            <Link style={{color:"White"}} to="/project"><Link style={{"color":"white"}} to={`/project/${id}`}> View project </Link></Link>
             </Button>
             
             

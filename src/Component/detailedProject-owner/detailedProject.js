@@ -5,7 +5,7 @@ import { Details } from "./details"
 import { Propsals } from './propsals'
 import {ModalSwitch} from './ModalSwitch'
 import {DeleteModal} from './DeleteModel'
-import {setModal,getproject} from "../../store/projects/project.store"
+import {setModal,getproject, setcheck} from "../../store/projects/project.store"
 
 
 
@@ -28,7 +28,7 @@ export const DetailedProject = (props) => {
     }
   
     console.log('dm',props.deleteModal)
-    
+    // console.log('props.projectData[0].isopen',props.projectData[0].isopen)
 
     const [view, setview] = useState(true)
     const dispatch = useDispatch()
@@ -36,27 +36,27 @@ export const DetailedProject = (props) => {
     const openDetails = () => { setview(true) }
     const openProposals = () => { setview(false) }
     const  _id  = props.match.params.id
-    
     console.log(_id)
     useEffect(() => {
       const load = async () => {
         await dispatch(getproject(_id));
         console.log('props--->props', props)
+        
     };
     load();
-    
+
     }, [dispatch])
 
     return (
-        <>
-     
-            <h2>{props.match.params.id}</h2>
+        <> 
+        {console.log('why me ',props.check)}
+        
             <Form>
                 <Form.Check
                     type="switch"
                     id="custom-switch"
                     label="Close project"
-                    checked={props.projectData !== null  ? !props.projectData[0].isopen : false}
+                    // checked={props.check}
                     onChange={toggleEnabled} 
                 />
             </Form>
@@ -72,7 +72,7 @@ export const DetailedProject = (props) => {
 
 
             <Page />
-            
+
             <Modals />
         </>
     )
@@ -84,7 +84,9 @@ const mapStateToProps = (state) => ({
     details: state.projects.projectDetails,
     Modal:state.projects.Modal,
     projectData: state.projects.projectData,
-    deleteModal:state.projects.deleteModal
+    deleteModal:state.projects.deleteModal,
+    account:state.users.account,
+    check:state.projects.check
     
 
 })

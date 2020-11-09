@@ -1,21 +1,33 @@
 import React, { Component,useState,useEffect} from 'react'
 import { Card,Modal,Button } from 'react-bootstrap'
 import { connect, useDispatch } from 'react-redux'
-import {setModal,setDetails,editproject,getproject} from "../../store/projects/project.store"
+import {setModal,setDetails,editproject,getproject,setcheck} from "../../store/projects/project.store"
+import {Link} from "react-router-dom"
 
 
 
 
 export function ModalSwitch(props) {
     const dispatch = useDispatch()
-    console.log(props.props.match.params.id)
-
+    console.log(props.props.projectData[0].isopen)
+    let obj =props.props.projectData[0]
+    console.log("isopen",props.props.account.token)
+    //  obj.isopen = !obj.isopen
+    
     function editIsOpen(){
       const edit = async () => {
-        await dispatch(editproject(props.props.match.params.id));
+        await dispatch(editproject({
+          "title": obj.title,
+          "description": obj.desc,
+          "category": obj.category,
+          "budget": obj.budget + "$",
+          "isopen": !obj.isopen
+      },props.props.match.params.id,
+      props.props.account.token));
         
     };
     edit();
+    dispatch(setcheck(!obj.isopen))
     }
     const [show, setShow] = useState(false);
     const closeFun = ()=> dispatch(setModal(false))
@@ -50,7 +62,9 @@ export function ModalSwitch(props) {
 const mapStateToProps = (state) => ({
   details: state.projects.projectDetails,
   Modal:state.projects.Modal,
-  projectData: state.projects.projectData
+  projectData: state.projects.projectData,
+  account:state.users.account,
+  check:state.projects.check
 })
 
 

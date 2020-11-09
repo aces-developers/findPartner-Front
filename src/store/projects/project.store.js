@@ -10,7 +10,8 @@ const projects = createSlice({
     projectDetails:[],
     Modal: false,
     deleteModal:false,
-    sessionToken:''
+    sessionToken:'',
+    check:false
   },
   reducers: {
     setprojectData(state, action) {
@@ -43,6 +44,9 @@ const projects = createSlice({
     },setDeleteModal(state, action) {
       console.log("setdeleteModal=====>", action);
       state.deleteModal = action.payload;
+    },setcheck(state, action) {
+      console.log("setcheck=====>", action);
+      state.check = action.payload;
     },
     
   },
@@ -91,13 +95,13 @@ export const handleSearch = (q, search) => async (dispatch, getState) => {
       console.log(error);
     });
 };
-export const handlepost = (bod,token) => async (dispatch, getState) => {
+export const handlepost = (bod,token,id) => async (dispatch, getState) => {
 
   const config = {
     // headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhpZGF5YS1TeWFtIiwiaWF0IjoxNjA0Njg5NTgzfQ.08VecrnTBaSvjG-UX5eC8QxYSMaUW64YL6-YkISQ3sY` }
     headers: { Authorization: `Bearer ${token}` }
 };
-
+console.log('token',token)
 const bodyParameters = bod
   
 
@@ -130,7 +134,7 @@ const bodyParameters = bod
 
   axios
     .put(
-      `https://as-findpartner.herokuapp.com/newproject/${id}`,
+      `https://as-findpartner.herokuapp.com/project/${id}`,
       bodyParameters,
       config
     )
@@ -191,26 +195,27 @@ export const getproject = (id) => async (dispatch, getState) => {
       console.log(error);
     });
 };
-export const editproject = (bod,id) => async (dispatch, getState) => {
+export const editproject = (bod,id,token) => async (dispatch, getState) => {
   const config = {
-    headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhpZGF5YS1TeWFtIiwiaWF0IjoxNjA0Njg5NTgzfQ.08VecrnTBaSvjG-UX5eC8QxYSMaUW64YL6-YkISQ3sY` }
-    // headers: { Authorization: `Bearer ${token}` }
+    // headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhpZGF5YS1TeWFtIiwiaWF0IjoxNjA0Njg5NTgzfQ.08VecrnTBaSvjG-UX5eC8QxYSMaUW64YL6-YkISQ3sY` }
+    headers: { Authorization: `Bearer ${token}` }
 };
 
 const bodyParameters = bod
-  
+
+console.log('token',token)
 
   axios
     .put(
-      `https://as-findpartner.herokuapp.com/newproject`,
+      `https://as-findpartner.herokuapp.com/project/${id}`,
       bodyParameters,
       config
     )
     .then((res) => {
       // handle success
-      if (res.data) { dispatch(setModal(true)) }
-      console.log(" handleSearch success-->", res.data);
-      dispatch(setNewProject(res.data));
+      console.log(" handleopen success-->", res.data);
+      dispatch(setModal(false))
+      // dispatch(setcheck(res.data.isopen))
     })
     .catch((error) => {
       // handle error
@@ -234,6 +239,6 @@ export const deleteProject = (id) => async (dispatch, getState) => {
       console.log(error);
     });
 };
-export const {setprojectData, setProjects, setSearchResult, setNewProject, setModal, setSession ,setDeleteModal } = projects.actions;
+export const {setprojectData, setProjects, setSearchResult, setNewProject, setModal, setSession ,setDeleteModal,setcheck } = projects.actions;
 // export const { setProjects, setSearchResult,setNewProject,setModal,setSession,setDetails} = projects.actions;
 export default projects.reducer;

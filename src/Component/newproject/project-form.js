@@ -57,13 +57,14 @@ function ProjectForm(props) {
             "category": category,
             "budget": budget + "$",
             "isopen": true
-        },props.token));
+        },props.account.token));
     };
 
 
 
     return (
-        <>
+        <>   
+            {console.log('sdadadadad',props.account.token)}
             {console.log(props.Modal)}
 
             <Card>
@@ -133,6 +134,7 @@ function ProjectForm(props) {
 const mapStateToProps = (state) => ({
     newproject: state.projects.newproject,
     Modal: state.projects.Modal,
-    token: state.projects.sessionToken
+    token: state.projects.sessionToken,
+    account: state.users.account
 });
 export default connect(mapStateToProps)(ProjectForm);
