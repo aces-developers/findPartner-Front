@@ -11,15 +11,15 @@ const Schema = Yup.object().shape({
 });
 function Details(props) {
     const dispatch = useDispatch();
-    const { _id } = props.match.params
+    const { _id } = props.props.match.params
     console.log(_id)
-    useEffect(() => {
-        const load = async () => {
-            await dispatch(getproject(_id));
-            console.log('props--->props', props)
-        };
-        load();
-    }, []);
+    // useEffect(() => {
+    //     const load = async () => {
+    //         await dispatch(getproject(_id));
+    //         console.log('props--->props', props)
+    //     };
+    //     load();
+    // }, []);
 
     //console.log('props ---> ', )
     return (

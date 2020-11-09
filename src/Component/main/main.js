@@ -10,6 +10,7 @@ import CompleteSignup from "../accountInfo/accountInfo";
 import AboutUs from "../about/about";
 import Footer from "../footer/footer";
 import projectForm from "../newproject/project-form";
+import Homedetails from '../fulldetalis/detalis'
 //new routes
 import Detalis from "../projects/projectDetails";
 // import Dashboard from "../dashboard/dashboard";
@@ -55,8 +56,7 @@ function Main(props) {
         <Route path="/AboutUs" component={AboutUs} />
         {/* new routes */}
 
-        <Route path="/detalis/:_id" component={Detalis} />
-        <Route path="/project/:id" component={detailedProject} />
+        <Route path="/detalis/:_id" component={Homedetails} />
         <Route path="/edit/:id" component={EditProject} />
       </Switch>
       <Footer />

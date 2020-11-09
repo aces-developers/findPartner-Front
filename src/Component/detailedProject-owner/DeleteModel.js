@@ -1,18 +1,20 @@
 import React, { Component,useState,useEffect} from 'react'
 import { Card,Modal,Button } from 'react-bootstrap'
 import { connect, useDispatch } from 'react-redux'
-import {setModal,setDetails,deleteProject,getproject,setDeleteModal} from "../../store/projects/project.store"
+import {deleteProject,setDeleteModal} from "../../store/projects/project.store"
 
 
 
 export function DeleteModal(props) {
     const dispatch = useDispatch()
-    let id = props.props.match.params.id
-
-    function deleteMyProject(id){
+    //let id =props.props.props.props.match.params._id
+   //console.log('delete',props.props.props.projectData[0])
+    function deleteMyProject(){
       const edit = async () => {
-        await dispatch(deleteProject(id));
-        
+        await dispatch(deleteProject(
+          props.props.props.projectData[0],
+          props.props.props.account.token));
+          props.props.props.history.push('/')
     };
     edit();
     }
