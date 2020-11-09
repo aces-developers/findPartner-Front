@@ -1,5 +1,5 @@
 import "./App.css";
-import Main from "./Component/main/main";
+import Main from "./component/main/main";
 import React from "react";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router } from "react-router-dom";
