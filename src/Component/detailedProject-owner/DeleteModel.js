@@ -14,6 +14,7 @@ export function DeleteModal(props) {
         await dispatch(deleteProject(
           props.props.props.projectData[0],
           props.props.props.account.token));
+          dispatch(setDeleteModal(!props.props.props.deleteModal))
           props.props.props.history.push('/')
     };
     edit();

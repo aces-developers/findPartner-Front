@@ -233,7 +233,7 @@ export const deleteProject = (body,token) => async (dispatch, getState) => {
 
   axios
     .delete(
-      `https://as-findpartner.herokuapp.com/${body._id}?oid=${body._ownerId}`,
+      `https://as-findpartner.herokuapp.com/project/${body._id}?oid=${body._ownerId}`,
       config)
     .then((res) => {
       // handle success
