@@ -19,6 +19,8 @@ import CompleteSignup from './Component/accountInfo/accountInfo'
 import AboutUs from './Component/about/about'
 import Footer from './Component/footer/footer'
 import Dashboard from './Component/dashboard/dashboard'
+import MyProjects from './Component/myProjects/myProjects';
+
 
 import {setAccount} from "./store/users/users.store"
 import useBeforeFirstRender from '../src/hooks/componentWillMount'
@@ -32,7 +34,7 @@ const MyComponent = () => {
     
        let user =JSON.parse(localStorage.getItem('account'));
        console.log('for check',user)
-        dispatch(setAccount(user))
+        //dispatch(setAccount(user))
      
     }
   })
@@ -104,6 +106,7 @@ function AppWrapper() {
             <Route path="/SignUp" component={SignUp} />
             <Route path="/Regisration" component={CompleteSignup} />
             <Route path="/AboutUs" component={AboutUs} />
+            <Route path="/MyProjects" component={MyProjects} />
 
           </Switch>
           <Footer/>

@@ -7,7 +7,9 @@ const projects = createSlice({
     searchResult: [],
     newproject:[],
     Modal: false,
-    sessionToken:''
+    sessionToken:'',
+    AllAppliedID:[],
+
   },
   reducers: {
     setProjects(state, action) {
@@ -30,6 +32,12 @@ const projects = createSlice({
       console.log("setNewProject =====>", action);
       state.sessionToken = action.payload;
     },
+    setAllAppliedID(state, action) {
+        console.log("AllAppliedID action  =====>", action);
+        state.AllAppliedID = action.payload;
+        //state.AllAppliedID = action.payload.map(proj=>(proj.projectId));
+      },
+   
   },
 });
 
@@ -104,5 +112,23 @@ const bodyParameters = bod
       console.log(error);
     });
 };
-export const { setProjects, setSearchResult,setNewProject,setModal,setSession} = projects.actions;
+
+export const getAllApplied = (props) => async (dispatch, getState) => {
+
+    const config = {
+       headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhpZGF5YS1TeWFtIiwiaWF0IjoxNjA0OTMxNjg3fQ.EClvcDWAtK3Ap4XcR2lwlA5-zpqEjlTLeQKJhKoB_tI` }
+    //  headers: { Authorization: `Bearer ${token}` }
+  };
+     axios.get(`https://as-findpartner.herokuapp.com/allapply`, config)
+      .then((res) => {
+        console.log(" getAllApplyed success-->", res.data);
+        dispatch(setAllAppliedID(res.data))
+    })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+//allapply
+export const { setProjects, setSearchResult,setNewProject,setModal,setSession,setAllAppliedID} = projects.actions;
 export default projects.reducer;

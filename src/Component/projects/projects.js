@@ -47,7 +47,7 @@ function Project(props) {
 
     return (
         <>
-            {console.log(props)}
+            {console.log('props',props)}
             <Card>
                 <Form onSubmit={handlesubmit}>
                     <input hidden={search !== 'title' ? true : false} onChange={onChangeSearchInput} placeholder="Search"></input>

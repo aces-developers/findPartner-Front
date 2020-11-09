@@ -90,6 +90,9 @@ function Header(props) {
                   BROWSE PROJECT
                 </Link>
               </Nav.Link>
+              <Nav.Link className="mr-4" href="#pricing">
+                  <Link to="/MyProjects">  My Projects </Link>
+              </Nav.Link>
               <Nav.Link className="mr-4" href="#features">
                 BROWSE POTENTIAL PARTNERS
               </Nav.Link>
