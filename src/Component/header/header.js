@@ -8,7 +8,6 @@ import "./header.scss";
 
 function Header(props) {
   const dispatch = useDispatch();
-
   const handleMessageState = () => {
     dispatch(setMessage(null));
   };

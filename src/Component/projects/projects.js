@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { loadProjects, handleSearch } from "../../store/projects/project.store";
 import { connect, useDispatch } from "react-redux";
-import { Card, Button, Row, Col, Image } from "react-bootstrap";
+import { Card, Button, Row, Col, Image, Container } from "react-bootstrap";
 import { ButtonGroup, DropdownButton, Dropdown, Form } from "react-bootstrap";
-import PCard from "./p-Card";
+import PCard from "./card/p-Card";
 import Figure from "react-bootstrap/Figure";
+import "./projects-list.scss";
 
 function Project(props) {
   const [q, setq] = useState("");
@@ -44,10 +45,9 @@ function Project(props) {
   };
 
   return (
-    <>
-      {console.log(props)}
-      <Card>
-        <Form onSubmit={handlesubmit}>
+    <div className="project-search">
+      <Container className="project-search-container">
+        <Form className="form-style" onSubmit={handlesubmit}>
           <input
             hidden={search !== "title" ? true : false}
             onChange={onChangeSearchInput}
@@ -94,18 +94,17 @@ function Project(props) {
             </div>
           }
         </Form>
-        {props.searchResult.map((item, index) => {
-          return (
-            <div
-              key={index}
-              style={{ float: "left", margin: "30px", padding: "10px" }}
-            >
-              <PCard Item={item} />
-            </div>
-          );
-        })}
-      </Card>
-    </>
+        <div className="mb-4 flex-horizental-container">
+          {props.searchResult.map((item, index) => {
+            return (
+              <div key={index}>
+                <PCard Item={item} />
+              </div>
+            );
+          })}
+        </div>
+      </Container>
+    </div>
   );
 }
 
