@@ -6,7 +6,7 @@ import Ues from "../sectionUse/sectionUse";
 import ListProject from "../projects/list-projects";
 import SignUp from "../signUp/signUp";
 import SignIn from "../singIn/signIn";
-import CompleteSignup from "../accountInfo/accountInfo";
+import Regisration from "../regisration/regisration";
 import AboutUs from "../about/about";
 import Footer from "../footer/footer";
 import projectForm from "../newproject/project-form";
@@ -51,7 +51,7 @@ function Main(props) {
         <Route path="/newprojects" component={projectForm} />
         <Route path="/SignIn" component={SignIn} />
         <Route path="/SignUp" component={SignUp} />
-        <Route path="/Regisration" component={CompleteSignup} />
+        <Route path="/Regisration" component={Regisration} />
         <Route path="/AboutUs" component={AboutUs} />
         {/* new routes */}
 

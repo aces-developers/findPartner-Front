@@ -1,16 +1,18 @@
 import React, { useState } from "react";
-import { Alert, Card, Form, Button } from "react-bootstrap";
+import { Alert, Card, Form, Button, Container } from "react-bootstrap";
 import { connect, useDispatch } from "react-redux";
 import { IsExist } from "../../store/users/users.store";
 import { Link } from "react-router-dom";
 import { If, Then } from "../IF";
 import { Redirect } from "react-router";
+import "./signUp.scss";
+
 function Signup(props) {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
+
   const handlesubmit = (e) => {
     e.preventDefault();
-
     const load = async () => {
       console.log("event ->>>>", email);
       await dispatch(IsExist(email));
@@ -24,71 +26,60 @@ function Signup(props) {
   };
 
   return (
-    <>
-      <style type="text/css">
-        {`
-       .inputs {
-           width:50%;
-           margin:2% 25% ;
-      }
-    
-    `}
-      </style>
+    <div className="signup-section">
+      <Container className="signup-container">
+        <Card className="text-center signup-card">
+          <Card.Header className="signup-header">Sign up</Card.Header>
+          <Card.Body>
+            <Form onSubmit={handlesubmit}>
+              <Button className="con-linkedin">Continue with LinkedIn</Button>
 
-      <Card className="text-center">
-        <Card.Header>Sign UP</Card.Header>
-        <Card.Body>
-          <Form onSubmit={handlesubmit}>
-            <Button variant="primary">Continue with LinkedIn</Button>
+              <Form.Group controlId="formBasicEmail" className="inp-email">
+                <Form.Control
+                  name="email"
+                  type="email"
+                  onChange={handleChange}
+                  placeholder="ex: John@gmail.com"
+                />
+                <Form.Text className="text-muted">
+                  We'll never share your email with anyone else.
+                </Form.Text>
+              </Form.Group>
 
-            <Form.Group controlId="formBasicEmail">
-              <Form.Control
-                name="email"
-                type="email"
-                onChange={handleChange}
-                placeholder="ex: John@gmail.com"
-                className="inputs"
-              />
-              <Form.Text className="text-muted">
-                We'll never share your email with anyone else.
-              </Form.Text>
-            </Form.Group>
-
-            <Button type="submit" variant="primary">
-              Continue with Email
-            </Button>
-          </Form>
-        </Card.Body>
-      </Card>
-      {/* {
+              <Button type="submit" className="con-email">
+                Continue with Email
+              </Button>
+            </Form>
+          </Card.Body>
+        </Card>
+        {/* {
         props.message &&
      
       
       } */}
 
-      <If condition={props.message === "y"}>
-        <Then>
-          <Alert variant="danger">
-            <Alert.Link href="#">
-              {" "}
-              you are already have Account{" "}
-              <Link to="/SignIn"> go to Login </Link>
-            </Alert.Link>
-            .
-          </Alert>
-        </Then>
-      </If>
-      <If condition={props.message === "z"}>
-        <Then>
-          <Redirect
-            to={{
-              pathname: "/Regisration",
-              state: { email: email },
-            }}
-          />
-        </Then>
-      </If>
-    </>
+        <If condition={props.message === "y"}>
+          <Then>
+            <Alert variant="danger" className="alert-style">
+              you are already have Account
+              <Link className="alert-style-link " to="/SignIn">
+                Go to Login
+              </Link>
+            </Alert>
+          </Then>
+        </If>
+        <If condition={props.message === "z"}>
+          <Then>
+            <Redirect
+              to={{
+                pathname: "/Regisration",
+                state: { email: email },
+              }}
+            />
+          </Then>
+        </If>
+      </Container>
+    </div>
   );
 }
 

@@ -88,7 +88,7 @@ export const IsExist = (userEmail) => async (dispatch, getState) => {
     .get(`https://as-findpartner.herokuapp.com/useremail/${userEmail}`)
     .then((res) => {
       // handle success
-      console.log(" handle success-->", res.data);
+      console.log(" handle IsExist success-->", res.data);
       if (res.data.length !== 0) {
         dispatch(setMessage("y"));
       } else {
