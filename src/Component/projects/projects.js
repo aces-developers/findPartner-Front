@@ -112,8 +112,3 @@ const mapStateToProps = (state) => ({
   searchResult: state.projects.searchResult,
 });
 export default connect(mapStateToProps)(Project);
-
-//   return (
-//     <>
-//
-//     </>

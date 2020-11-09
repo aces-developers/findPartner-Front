@@ -3,6 +3,7 @@ import { Card, Button, Row, Col, Image } from "react-bootstrap";
 import "./p-card.scss";
 import user from "./user.svg";
 import tag from "./tag.svg";
+import { Link } from "react-router-dom";
 
 export default function Project(props) {
   console.log("card props ------> ", props);
@@ -23,7 +24,14 @@ export default function Project(props) {
               <img className="tag-style" src={tag} /> {props.Item.category}
             </Card.Text>
             <Button className="card-link-style" variant="link">
-              More details
+              <Link
+                to={{
+                  pathname: `/detalis/${props.Item._id}`,
+                  state: { _id: props.Item._id },
+                }}
+              >
+                More Details
+              </Link>
             </Button>
           </div>
         </Card.Body>
