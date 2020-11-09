@@ -1,13 +1,16 @@
 import React from "react";
 import { Container, Navbar, Nav, Form, Button } from "react-bootstrap";
 import { NavLink,Link } from "react-router-dom";
-import findPartner from "./findPartner2.png";
+import findPartner from "../header/findPartner2.png";
 import { connect, useDispatch } from "react-redux";
-import {  setMessage } from "../../store/users/users.store";
+import {  setMessage,setAccount } from "../../store/users/users.store";
 
-function Header(props) {
-  const dispatch= useDispatch();
-
+function Dashboard(props) {
+  const dispatch = useDispatch()
+//   if(localStorage){
+//     let user =JSON.parse(localStorage.getItem('user'));
+//     dispatch(setAccount(user))
+//   }
   const handleMessageState=()=>{
     dispatch(setMessage(null))
   }
@@ -76,7 +79,7 @@ function Header(props) {
       </style>
 
       <Navbar className="navbar" expand="lg">
-        <Container>
+        {/* <Container>
           <Navbar.Brand href="#home">
             <Link to="/">
               <img className="logo" src={findPartner} />{" "}
@@ -98,21 +101,25 @@ function Header(props) {
               </Nav.Link>
             </Nav>
             <Nav.Link className="login">    
-                    <Link to="/SignIn"> Sign in  </Link>
+                    <Link to="/something else"> something else  </Link>
             </Nav.Link>
             <Button variant="flat">    
-                            <Link to="/SignUp" onClick={handleMessageState}>  SignUp </Link>
+                            <Link to="/newproject" onClick={handleMessageState}>  new project </Link>
                               </Button>
           </Navbar.Collapse>
-        </Container>
+        </Container> */}
       </Navbar>
     </>
   );
 }
-const mapStateToProps = (state) => ({
-  message: state.users.message,
 
+
+const mapStateToProps = (state) => ({
+  users: state.users.account,
+  projetcs: state.projects.sessionToken,
+  message: state.users.message,
 });
 
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps)(Dashboard);
+
