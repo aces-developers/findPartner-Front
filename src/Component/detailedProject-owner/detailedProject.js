@@ -49,17 +49,17 @@ export const DetailedProject = (props) => {
 
     return (
         <> 
-        {console.log('why me ',props.props.check)}
-        
+         {props.props.projectData &&
             <Form>
                 <Form.Check
                     type="switch"
                     id="custom-switch"
                     label="Close project"
-                    // checked={props.check}
+                    //  checked={props.props.check}
                     onChange={toggleEnabled} 
                 />
             </Form>
+}
             <Nav variant="pills" defaultActiveKey="/home">
                 <Nav.Item>
                     <Nav.Link onClick={openDetails}>Details</Nav.Link>
@@ -69,7 +69,6 @@ export const DetailedProject = (props) => {
                 </Nav.Item>
            
             </Nav>
-
 
             <Page />
 
