@@ -132,7 +132,9 @@ export const handleEdit = (bod,token,id) => async (dispatch, getState) => {
 
 const bodyParameters = bod
   
-
+console.log('bod',bodyParameters)
+console.log('token',token)
+console.log('id',id)
   axios
     .put(
       `https://as-findpartner.herokuapp.com/project/${id}`,
@@ -142,7 +144,7 @@ const bodyParameters = bod
     .then((res) => {
       // handle success
       if (res.data) 
-      console.log(" handleSearch success-->", res.data);
+      console.log(" handleSearch success-->", res);
       dispatch(setNewProject(res.data));
     })
     .catch((error) => {

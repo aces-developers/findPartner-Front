@@ -14,21 +14,27 @@ export const Details = (props) => {
             return <DeleteModal props={props.props} />
         }else return ( <></>)
     }
+   
     const modalInitiate = ()=>{dispatch(setDeleteModal(!props.props.deleteModal))}
     return (
-        <><Card style={{ width: '58rem' }}>
-            <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-                <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>
-                <Card.Text>
-                    Some quick example text to build on the card title and make up the bulk of
-                    the card's content.
-          </Card.Text>
-          
-            </Card.Body>
-        </Card>
+        <>
+        {props.props.projectData &&
+            
+                <Card style={{ width: '25rem' }}>
+                    <Card.Body>
+                        <Card.Title>{props.props.projectData[0].title}</Card.Title>
+                        <Card.Text>{props.props.projectData[0]._ownerName} </Card.Text>
+                        <Card.Text>{props.props.projectData[0].category} </Card.Text>
+
+                        <Card.Text>
+                            {props.props.projectData[0].description}
+                        </Card.Text>
+
+                    </Card.Body>
+                </Card>
+                }
             <ButtonGroup aria-label="Basic example">
-                <Button variant="secondary"><Link style={{"color":"white"}} to={`/edit/${props.props.match.params.id}`}> Edit </Link></Button>
+                <Button variant="secondary"><Link style={{"color":"white"}} to={`/edit/${props.props.match.params._id}`}> Edit </Link></Button>
                 <Button onClick={modalInitiate} variant="secondary">Delete </Button>
             </ButtonGroup>
             <DelModals/>
