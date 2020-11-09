@@ -1,21 +1,43 @@
-import React, { Component,useState} from 'react'
+import React, { Component,useState,useEffect} from 'react'
 import { Card,Modal,Button } from 'react-bootstrap'
 import { connect, useDispatch } from 'react-redux'
-import {setModal} from "../../store/projects/project.store"
+import {setModal,setDetails,editproject,getproject,setcheck} from "../../store/projects/project.store"
+import {Link} from "react-router-dom"
+
+
 
 
 export function ModalSwitch(props) {
     const dispatch = useDispatch()
+    console.log(props.props.projectData[0].isopen)
+    let obj =props.props.projectData[0]
+    console.log("isopen",props.props.account.token)
+    //  obj.isopen = !obj.isopen
+    
+    function editIsOpen(){
+      const edit = async () => {
+        await dispatch(editproject({
+          "title": obj.title,
+          "description": obj.desc,
+          "category": obj.category,
+          "budget": obj.budget + "$",
+          "isopen": !obj.isopen
+      },props.props.match.params.id,
+      props.props.account.token));
+        
+    };
+    edit();
+    dispatch(setcheck(!obj.isopen))
+    }
     const [show, setShow] = useState(false);
     const closeFun = ()=> dispatch(setModal(false))
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-  
+    // console.log(props.projectData)
+    
     return (
       <>
-        <Button  show={false} variant="primary" onClick={handleShow}>
-          Launch demo modal
-        </Button>
+        
   
         <Modal  show={props.Modal?handleShow:handleClose} onHide={closeFun}>
           <Modal.Header closeButton>
@@ -26,7 +48,7 @@ export function ModalSwitch(props) {
             <Button variant="secondary" onClick={closeFun}>
               Close
             </Button>
-            <Button variant="primary" onClick={closeFun}>
+            <Button variant="primary" onClick={editIsOpen}>
               Change
             </Button>
           </Modal.Footer>
@@ -38,7 +60,11 @@ export function ModalSwitch(props) {
 
 
 const mapStateToProps = (state) => ({
-    Modal:state.projects.Modal
+  details: state.projects.projectDetails,
+  Modal:state.projects.Modal,
+  projectData: state.projects.projectData,
+  account:state.users.account,
+  check:state.projects.check
 })
 
 

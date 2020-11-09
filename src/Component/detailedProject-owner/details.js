@@ -1,9 +1,20 @@
 import React, { Component } from 'react'
 import { Button,Card,ButtonGroup } from 'react-bootstrap'
 import { connect, useDispatch } from 'react-redux'
+import {DeleteModal} from './DeleteModel'
+import {setDeleteModal} from "../../store/projects/project.store"
+import {Link} from "react-router-dom"
 
 
-export const Details = () => {
+export const Details = (props) => {
+    console.log('wth where am i ',props)
+    const dispatch = useDispatch()
+    function DelModals() {
+        if(props.props.deleteModal){
+            return <DeleteModal props={props.props} />
+        }else return ( <></>)
+    }
+    const modalInitiate = ()=>{dispatch(setDeleteModal(!props.props.deleteModal))}
     return (
         <><Card style={{ width: '58rem' }}>
             <Card.Body>
@@ -17,15 +28,18 @@ export const Details = () => {
             </Card.Body>
         </Card>
             <ButtonGroup aria-label="Basic example">
-                <Button variant="secondary">Edit</Button>
-                <Button variant="secondary">Delete</Button>
+                <Button variant="secondary"><Link style={{"color":"white"}} to={`/edit/${props.props.match.params.id}`}> Edit </Link></Button>
+                <Button onClick={modalInitiate} variant="secondary">Delete </Button>
             </ButtonGroup>
+            <DelModals/>
         </>
+       
     )
 }
 
 const mapStateToProps = (state) => ({
     details: state.projects.projectDetails,
+    deleteModal:state.projects.deleteModal
     
 })
 

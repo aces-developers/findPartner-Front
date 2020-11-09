@@ -9,7 +9,9 @@ const projects = createSlice({
     newproject:[],
     projectDetails:[],
     Modal: false,
-    sessionToken:''
+    deleteModal:false,
+    sessionToken:'',
+    check:false
   },
   reducers: {
     setprojectData(state, action) {
@@ -39,7 +41,14 @@ const projects = createSlice({
     setDetails(state, action) {
       console.log("setDetails =====>", action);
       state.projectDetails = action.payload;
+    },setDeleteModal(state, action) {
+      console.log("setdeleteModal=====>", action);
+      state.deleteModal = action.payload;
+    },setcheck(state, action) {
+      console.log("setcheck=====>", action);
+      state.check = action.payload;
     },
+    
   },
 });
 
@@ -86,13 +95,13 @@ export const handleSearch = (q, search) => async (dispatch, getState) => {
       console.log(error);
     });
 };
-export const handlepost = (bod,token) => async (dispatch, getState) => {
+export const handlepost = (bod,token,id) => async (dispatch, getState) => {
 
   const config = {
     // headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhpZGF5YS1TeWFtIiwiaWF0IjoxNjA0Njg5NTgzfQ.08VecrnTBaSvjG-UX5eC8QxYSMaUW64YL6-YkISQ3sY` }
     headers: { Authorization: `Bearer ${token}` }
 };
-
+console.log('token',token)
 const bodyParameters = bod
   
 
@@ -113,12 +122,39 @@ const bodyParameters = bod
       console.log(error);
     });
 };
+export const handleEdit = (bod,token,id) => async (dispatch, getState) => {
+
+  const config = {
+    // headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhpZGF5YS1TeWFtIiwiaWF0IjoxNjA0Njg5NTgzfQ.08VecrnTBaSvjG-UX5eC8QxYSMaUW64YL6-YkISQ3sY` }
+    headers: { Authorization: `Bearer ${token}` }
+};
+
+const bodyParameters = bod
+  
+
+  axios
+    .put(
+      `https://as-findpartner.herokuapp.com/project/${id}`,
+      bodyParameters,
+      config
+    )
+    .then((res) => {
+      // handle success
+      if (res.data) 
+      console.log(" handleSearch success-->", res.data);
+      dispatch(setNewProject(res.data));
+    })
+    .catch((error) => {
+      // handle error
+      console.log(error);
+    });
+};
 
 
 export const apply = (id,propsal) => async (dispatch, getState) => {
 
   const config = {
-    headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhpZGF5YS1TeWFtIiwiaWF0IjoxNjA0ODQ0Mzc3fQ.jxK0hLKrgT3bezPw2Iv5G2hqnvIMjaIkqR2CCTPrWoU` }
+    headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhpZGF5YS1TeWFtIiwiaWF0IjoxNjA0ODU2MTA2fQ.7BRVrqCZeWO1rpWUQ1gO7CfgHFWz5YujfnUWL9RCw7Y` }
 
   };
  
@@ -159,6 +195,50 @@ export const getproject = (id) => async (dispatch, getState) => {
       console.log(error);
     });
 };
-export const {setprojectData, setProjects, setSearchResult, setNewProject, setModal, setSession } = projects.actions;
+export const editproject = (bod,id,token) => async (dispatch, getState) => {
+  const config = {
+    // headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhpZGF5YS1TeWFtIiwiaWF0IjoxNjA0Njg5NTgzfQ.08VecrnTBaSvjG-UX5eC8QxYSMaUW64YL6-YkISQ3sY` }
+    headers: { Authorization: `Bearer ${token}` }
+};
+
+const bodyParameters = bod
+
+console.log('token',token)
+
+  axios
+    .put(
+      `https://as-findpartner.herokuapp.com/project/${id}`,
+      bodyParameters,
+      config
+    )
+    .then((res) => {
+      // handle success
+      console.log(" handleopen success-->", res.data);
+      dispatch(setModal(false))
+      // dispatch(setcheck(res.data.isopen))
+    })
+    .catch((error) => {
+      // handle error
+      console.log(error);
+    });
+};
+export const deleteProject = (id) => async (dispatch, getState) => {
+
+  console.log('getproject ---> ', id)
+  axios
+    .put(
+      `https://as-findpartner.herokuapp.com/project/${id}`)
+    .then((res) => {
+      // handle success
+     
+      console.log(" getproject success-->", res.data);
+      
+    })
+    .catch((error) => {
+      // handle error
+      console.log(error);
+    });
+};
+export const {setprojectData, setProjects, setSearchResult, setNewProject, setModal, setSession ,setDeleteModal,setcheck } = projects.actions;
 // export const { setProjects, setSearchResult,setNewProject,setModal,setSession,setDetails} = projects.actions;
 export default projects.reducer;
