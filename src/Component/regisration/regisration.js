@@ -1,22 +1,9 @@
-import React, { useState } from "react";
-import {
-  InputGroup,
-  Col,
-  Row,
-  ButtonGroup,
-  Dropdown,
-  DropdownButton,
-  Form,
-  Button,
-  Container,
-  Card,
-} from "react-bootstrap";
+import React from "react";
+import { Col, Row, Form, Button, Container, Card } from "react-bootstrap";
 import { connect, useDispatch } from "react-redux";
-import { Formik, Field, ErrorMessage } from "formik";
+import { Formik } from "formik";
 import * as Yup from "yup";
-import { Redirect } from "react-router";
 import { SignUp } from "../../store/users/users.store";
-import { apply } from "../../store/projects/project.store";
 
 const SignUpSchema = Yup.object().shape({
   fullname: Yup.string()
@@ -76,16 +63,22 @@ function Regisration(props) {
           <Container>
             <Row className="justify-content-md-center">
               <Col md={6}>
-                <Card className="p-4">
-                  <Form noValidate onSubmit={handleSubmit}>
-                    <Form.Group controlId="validationFormik101">
-                      <Form.Control.Feedback tooltip>
-                        Looks good!
-                      </Form.Control.Feedback>
-                    </Form.Group>
-                    <Form.Group controlId="validationFormikUsername2">
-                      <Form.Label>Full Name</Form.Label>
-                      <InputGroup>
+                <Card>
+                  <Card.Header className="signup-header text-center">
+                    Complete Registration
+                  </Card.Header>
+                  <Card.Body className="p-4 ">
+                    <Form noValidate onSubmit={handleSubmit}>
+                      <Form.Group controlId="validationFormik101">
+                        <Form.Control.Feedback tooltip>
+                          Looks good!
+                        </Form.Control.Feedback>
+                      </Form.Group>
+                      <Form.Group
+                        className="w-75 m-auto "
+                        controlId="validationFormikUsername2"
+                      >
+                        <Form.Label>Full Name</Form.Label>
                         <Form.Control
                           type="text"
                           placeholder="Name"
@@ -94,131 +87,163 @@ function Regisration(props) {
                           value={values.fullname}
                           onChange={handleChange}
                           isInvalid={!!errors.fullname}
+                          className="mb-4"
                         />
                         <Form.Control.Feedback type="invalid" tooltip>
                           {errors.fullname}
                         </Form.Control.Feedback>
-                      </InputGroup>
-                    </Form.Group>
+                      </Form.Group>
 
-                    <Form.Group controlId="validationFormik103">
-                      <Form.Label>Location</Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder="Location"
-                        name="location"
-                        value={values.location}
-                        onChange={handleChange}
-                        isInvalid={!!errors.location}
-                      />
-
-                      <Form.Control.Feedback type="invalid" tooltip>
-                        {errors.location}
-                      </Form.Control.Feedback>
-                    </Form.Group>
-                    <Form.Group controlId="validationFormik104">
-                      <Form.Label>user name</Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder="User Name"
-                        name="username"
-                        value={values.username}
-                        onChange={handleChange}
-                        isInvalid={!!errors.username}
-                      />
-                      <Form.Control.Feedback type="invalid" tooltip>
-                        {errors.username}
-                      </Form.Control.Feedback>
-                    </Form.Group>
-                    <Form.Group controlId="validationFormik105">
-                      <Form.Label>Email</Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder="Email"
-                        name="email"
-                        value={values.email}
-                        onChange={handleChange}
-                        isInvalid={!!errors.email}
-                      />
-
-                      <Form.Control.Feedback type="invalid" tooltip>
-                        {errors.email}
-                      </Form.Control.Feedback>
-                    </Form.Group>
-                    <Form.Group controlId="validationFormik106">
-                      <Form.Label>Password</Form.Label>
-                      <Form.Control
-                        type="password"
-                        placeholder="Password"
-                        name="password"
-                        value={values.password}
-                        onChange={handleChange}
-                        isInvalid={!!errors.password}
-                      />
-
-                      <Form.Control.Feedback type="invalid" tooltip>
-                        {errors.password}
-                      </Form.Control.Feedback>
-                    </Form.Group>
-                    <Form.Group controlId="validationFormik107">
-                      <Form.Label>Skill</Form.Label>
-                      <Form.Control
-                        type="skill"
-                        placeholder="Skill"
-                        name="skill"
-                        value={values.skill}
-                        onChange={handleChange}
-                        isInvalid={!!errors.skill}
-                      />
-
-                      <Form.Control.Feedback type="invalid" tooltip>
-                        {errors.skill}
-                      </Form.Control.Feedback>
-                    </Form.Group>
-                    <Form.Group controlId="skillcat12">
-                      <Form.Label>Skill Cat</Form.Label>
-                      <Form.Control
-                        as="select"
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        name="skillCat"
-                        value={values.skillCat}
-                        id="dropdown-item-button"
+                      <Form.Group
+                        className="w-75 m-auto"
+                        controlId="validationFormik103"
                       >
-                        <option name="skillCat" value="engineering">
-                          Engineering
-                        </option>
-                        <option name="skillCat" value="arts">
-                          Arts
-                        </option>
-                        <option name="skillCat" value="business">
-                          Business
-                        </option>
-                        <option name="skillCat" value="communications">
-                          Communications
-                        </option>
-                        <option name="skillCat" value="community">
-                          Community
-                        </option>
-                        <option name="skillCat" value="cducation">
-                          Education
-                        </option>
-                        <option name="skillCat" value="science">
-                          Science
-                        </option>
-                        <option name="skillCat" value="farming">
-                          Farming
-                        </option>
-                        <option name="skillCat" value="health">
-                          Health
-                        </option>
-                        <option name="skillCat" value="it">
-                          IT
-                        </option>
-                      </Form.Control>
-                    </Form.Group>
-                    <Button type="submit">Submit form</Button>
-                  </Form>
+                        <Form.Label>Location</Form.Label>
+                        <Form.Control
+                          type="text"
+                          placeholder="Location"
+                          name="location"
+                          value={values.location}
+                          onChange={handleChange}
+                          isInvalid={!!errors.location}
+                          className="mb-4"
+                        />
+
+                        <Form.Control.Feedback type="invalid" tooltip>
+                          {errors.location}
+                        </Form.Control.Feedback>
+                      </Form.Group>
+                      <Form.Group
+                        className="w-75 m-auto"
+                        controlId="validationFormik104"
+                      >
+                        <Form.Label>User name</Form.Label>
+                        <Form.Control
+                          type="text"
+                          placeholder="User Name"
+                          name="username"
+                          value={values.username}
+                          onChange={handleChange}
+                          isInvalid={!!errors.username}
+                          className="mb-4"
+                        />
+                        <Form.Control.Feedback type="invalid" tooltip>
+                          {errors.username}
+                        </Form.Control.Feedback>
+                      </Form.Group>
+                      <Form.Group
+                        className="w-75 m-auto"
+                        controlId="validationFormik105"
+                      >
+                        <Form.Label>Email</Form.Label>
+                        <Form.Control
+                          type="text"
+                          placeholder="Email"
+                          name="email"
+                          value={values.email}
+                          onChange={handleChange}
+                          isInvalid={!!errors.email}
+                          className="mb-4"
+                        />
+
+                        <Form.Control.Feedback type="invalid" tooltip>
+                          {errors.email}
+                        </Form.Control.Feedback>
+                      </Form.Group>
+                      <Form.Group
+                        className="w-75 m-auto"
+                        controlId="validationFormik106"
+                      >
+                        <Form.Label>Password</Form.Label>
+                        <Form.Control
+                          type="password"
+                          placeholder="Password"
+                          name="password"
+                          value={values.password}
+                          onChange={handleChange}
+                          isInvalid={!!errors.password}
+                          className="mb-4"
+                        />
+
+                        <Form.Control.Feedback type="invalid" tooltip>
+                          {errors.password}
+                        </Form.Control.Feedback>
+                      </Form.Group>
+                      <Form.Group
+                        className="w-75 m-auto"
+                        controlId="validationFormik107"
+                      >
+                        <Form.Label>Skill</Form.Label>
+                        <Form.Control
+                          type="skill"
+                          placeholder="Skill"
+                          name="skill"
+                          value={values.skill}
+                          onChange={handleChange}
+                          isInvalid={!!errors.skill}
+                          className="mb-4"
+                        />
+
+                        <Form.Control.Feedback type="invalid" tooltip>
+                          {errors.skill}
+                        </Form.Control.Feedback>
+                      </Form.Group>
+                      <Form.Group
+                        className="w-75 m-auto"
+                        controlId="skillcat12"
+                      >
+                        <Form.Label>Skill Cat</Form.Label>
+                        <Form.Control
+                          as="select"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          name="skillCat"
+                          value={values.skillCat}
+                          id="dropdown-item-button"
+                          className="mb-4"
+                        >
+                          <option name="skillCat" value="engineering">
+                            Engineering
+                          </option>
+                          <option name="skillCat" value="arts">
+                            Arts
+                          </option>
+                          <option name="skillCat" value="business">
+                            Business
+                          </option>
+                          <option name="skillCat" value="communications">
+                            Communications
+                          </option>
+                          <option name="skillCat" value="community">
+                            Community
+                          </option>
+                          <option name="skillCat" value="cducation">
+                            Education
+                          </option>
+                          <option name="skillCat" value="science">
+                            Science
+                          </option>
+                          <option name="skillCat" value="farming">
+                            Farming
+                          </option>
+                          <option name="skillCat" value="health">
+                            Health
+                          </option>
+                          <option name="skillCat" value="it">
+                            IT
+                          </option>
+                        </Form.Control>
+                      </Form.Group>
+                      <div className="d-flex mb-4">
+                        <Button
+                          type="submit"
+                          className="w-75 m-auto con-linkedin"
+                        >
+                          Submit
+                        </Button>
+                      </div>
+                    </Form>
+                  </Card.Body>
                 </Card>
               </Col>
             </Row>
