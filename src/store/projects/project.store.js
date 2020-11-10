@@ -40,6 +40,12 @@ const projects = createSlice({
       console.log("setNewProject =====>", action);
       state.sessionToken = action.payload;
     },
+    /*setAllAppliedID(state, action) {
+        console.log("AllAppliedID action  =====>", action);
+        state.AllAppliedID = action.payload;
+        //state.AllAppliedID = action.payload.map(proj=>(proj.projectId));
+      },*/
+   
     setDetails(state, action) {
       console.log("setDetails =====>", action);
       state.projectDetails = action.payload;
@@ -158,6 +164,24 @@ console.log('id',id)
     });
 };
 
+/*export const getAllApplied = (props) => async (dispatch, getState) => {
+
+    const config = {
+       headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhpZGF5YS1TeWFtIiwiaWF0IjoxNjA0OTMxNjg3fQ.EClvcDWAtK3Ap4XcR2lwlA5-zpqEjlTLeQKJhKoB_tI` }
+    //  headers: { Authorization: `Bearer ${token}` }
+  };
+     axios.get(`https://as-findpartner.herokuapp.com/allapply`, config)
+      .then((res) => {
+        console.log(" >>>>>>>>>>>>getAllApplyed success-->", res.data);
+        dispatch(setAllAppliedID(res.data))
+    })
+      .catch((error) => {
+        console.log(error);
+      });
+  };*/
+
+//allapply
+//export const { setAllAppliedID} = projects.actions;
 
 export const apply = (id,propsal) => async (dispatch, getState) => {
 
@@ -277,6 +301,5 @@ export const getProposal = (projectId,token) => async (dispatch, getState) => {
       console.log(error);
     });
 };
-export const {setprojectData,setProposalData, setProjects, setSearchResult, setNewProject, setModal, setSession ,setDeleteModal,setcheck } = projects.actions;
-// export const { setProjects, setSearchResult,setNewProject,setModal,setSession,setDetails} = projects.actions;
+export const {setprojectData,setProposalData, setProjects, setSearchResult, setNewProject, setModal, setSession ,setDeleteModal,setcheck,setAllAppliedID } = projects.actions;
 export default projects.reducer;
