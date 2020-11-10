@@ -26,7 +26,7 @@ function Signup(props) {
   };
 
   return (
-    <div className="signup-section">
+    <div className="signup-section" style={{ height: "70vh" }}>
       <Container className="signup-container">
         <Card className="text-center signup-card">
           <Card.Header className="signup-header">Sign up</Card.Header>
