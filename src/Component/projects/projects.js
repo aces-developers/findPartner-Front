@@ -6,6 +6,7 @@ import { ButtonGroup, DropdownButton, Dropdown, Form } from "react-bootstrap";
 import PCard from "./card/p-Card";
 import Figure from "react-bootstrap/Figure";
 import "./projects-list.scss";
+import { PaginatedList } from 'react-paginated-list'
 
 function Project(props) {
   const [q, setq] = useState("");
@@ -123,15 +124,21 @@ function Project(props) {
             }
           </Row>
         </Form>
-        <div className="mb-4 flex-horizental-container">
-          {props.searchResult.map((item, index) => {
-            return (
-              <div key={index}>
-                <PCard Item={item} />
-              </div>
-            );
-          })}
-        </div>
+        <PaginatedList
+          list={props.searchResult}
+          itemsPerPage={6}
+          renderList={(list) => (
+            <div className="mb-4 flex-horizental-container">
+              {list.map((item, index) => {
+                return (
+                  <div key={index}>
+                    <PCard Item={item} />
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        />
       </Container>
     </div>
   );
