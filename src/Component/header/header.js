@@ -18,7 +18,7 @@ function Header(props) {
         <Container>
           <Navbar.Brand>
             <Link to="/">
-              <img className="logo" src={findPartner} />
+              <img className="logo" src={findPartner} alt="logo" />
             </Link>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -31,6 +31,11 @@ function Header(props) {
               </Nav.Item>
               <Nav.Item className="mr-4 routeLink">
                 BROWSE POTENTIAL PARTNERS
+              </Nav.Item>
+              <Nav.Item className="mr-4" href="#pricing">
+                <Link className="routeLink" to="/MyProjects">
+                  MY PROJECTS
+                </Link>
               </Nav.Item>
               <Nav.Item className="mr-4">
                 <Link className="routeLink" to="/AboutUs">

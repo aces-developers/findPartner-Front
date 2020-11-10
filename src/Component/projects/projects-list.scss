@@ -6,7 +6,7 @@
 
 .flex-horizental-container {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-wrap: wrap;
 }
 
@@ -22,4 +22,9 @@
   background-color: aqua;
   display: flex;
   flex-direction: column;
+}
+
+#dropdown-basic-button {
+  width: 95% !important;
+  padding: 5px 0;
 }
