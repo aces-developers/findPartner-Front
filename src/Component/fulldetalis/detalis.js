@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { If, Then, Else } from '../IF/index'
+import React, { useEffect } from "react";
+import { If, Then, Else } from "../IF/index";
 import { connect, useDispatch } from "react-redux";
 import DetailedProject from '../detailedProject-owner/detailedProject'
 import Details from '../projects/projectDetails'
@@ -56,8 +56,8 @@ function Homedetails(props) {
     )
 }
 
-
 const mapStateToProps = (state) => ({
+
     details: state.projects.projectDetails,
     Modal:state.projects.Modal,
     projectData: state.projects.projectData,
@@ -70,4 +70,3 @@ const mapStateToProps = (state) => ({
 
 
 export default connect(mapStateToProps)(Homedetails);
-

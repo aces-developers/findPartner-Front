@@ -9,7 +9,7 @@ import { faYoutube } from "@fortawesome/free-brands-svg-icons";
 export default function Footer(props) {
   return (
     <>
-      <footer className="sticky-bottom">
+      <footer>
         <h2>Find Partner</h2>
         <p>Your Partner to Success</p>
         <p>© 2020 Find Partner Inc. All rights reserved. Privacy Policy</p>
