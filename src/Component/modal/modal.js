@@ -28,7 +28,7 @@ function ProjectModal(props) {
             <Link  style={{color:"White"}} to="/">Back to Homepage</Link>
             </Button>
             <Button variant="primary" onClick={closeFun}>
-            <Link style={{color:"White"}} to="/project"><Link style={{"color":"white"}} to={`/project/${id}`}> View project </Link></Link>
+            <Link style={{"color":"white"}} to={`/detalis/${id}`}> View project </Link>
             </Button>
             
             

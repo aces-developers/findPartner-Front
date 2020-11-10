@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import { loadProjects } from "../../store/projects/project.store";
 import { connect, useDispatch } from "react-redux";
-import Card from '../projects/p-Card';
+import { Container } from "react-bootstrap";
+import Card from "./card/p-Card";
+import "./projects-list.scss";
 const Projects = (props) => {
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -16,28 +17,24 @@ const Projects = (props) => {
     load();
   }, [dispatch]);
 
-
-
   return (
-    <>
-      {props.projects.map(item => {
-        return <div style={{ float: "left",margin:"30px",padding:"10px" }}>
-          <Card  Item={item} />
-        </div>
-
-      })}
-
-    </>
-
+    <div className="section-back">
+      <h4 className="sectionTitle">Recent Projects</h4>
+      <Container className="mb-4 flex-horizental-container">
+        {props.projects.map((item, index) => {
+          return index < 6 ? (
+            <div key={index}>
+              <Card Item={item} />
+            </div>
+          ) : null;
+        })}
+      </Container>
+    </div>
   );
 };
 
 const mapStateToProps = (state) => ({
   projects: state.projects.projects,
- 
 });
 
-
 export default connect(mapStateToProps)(Projects);
-
-
