@@ -15,6 +15,7 @@
     "bootstrap": "^4.5.3",
     "bootstrap-icons": "^1.1.0",
     "formik": "^2.2.2",
+    "mdbreact": "^4.27.0",
     "multiselect-react-dropdown": "^1.6.1",
     "node-sass": "^4.14.1",
     "react": "^17.0.1",
