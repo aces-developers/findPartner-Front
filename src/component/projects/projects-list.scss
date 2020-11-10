@@ -1,0 +1,30 @@
+.section-back {
+  background-color: #f7f7ff;
+  padding: 100px 0;
+  box-sizing: border-box;
+}
+
+.flex-horizental-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.project-search {
+  background-color: #f7f7ff;
+}
+
+.project-search-container {
+  padding-bottom: 40px;
+}
+
+.form-style {
+  background-color: aqua;
+  display: flex;
+  flex-direction: column;
+}
+
+#dropdown-basic-button {
+  width: 95% !important;
+  padding: 5px 0;
+}
