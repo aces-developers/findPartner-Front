@@ -12,22 +12,11 @@ import {
 } from "../../store/projects/project.store";
 
 export const DetailedProject = (props) => {
-
-
-    function Page() {
-        if (view) {
-            return <Details props={props.props}/>
-        }
-        else {
-            return <Propsals  props={props.props} />
-        }
-    }
-    function Modals() {
-        if(props.Modal){
-            return <ModalSwitch props={props} />
-        }else if (props.props.deleteModal){
-            return <DeleteModal props={props} />
-        }else return ( <></>)
+  function Page() {
+    if (view) {
+      return <Details props={props.props} />;
+    } else {
+      return <Propsals props={props.props} />;
     }
   }
   function Modals() {
@@ -37,9 +26,6 @@ export const DetailedProject = (props) => {
       return <DeleteModal props={props} />;
     } else return <></>;
   }
-
-  console.log("dm", props.props);
-  // console.log('props.projectData[0].isopen',props.projectData[0].isopen)
 
   const [view, setview] = useState(true);
   const dispatch = useDispatch();
