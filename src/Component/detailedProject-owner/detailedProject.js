@@ -16,7 +16,7 @@ export const DetailedProject = (props) => {
             return <Details props={props.props}/>
         }
         else {
-            return <Propsals />
+            return <Propsals  props={props.props} />
         }
     }
     function Modals() {
