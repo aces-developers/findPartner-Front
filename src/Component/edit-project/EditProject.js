@@ -1,12 +1,13 @@
 import React from 'react'
 import { useState } from "react";
 import { connect, useDispatch } from 'react-redux'
-import { handlepost } from "../../store/projects/project.store";
+import { handleEdit } from "../../store/projects/project.store";
 import { Form, Card, Col, Button, DropdownButton, Dropdown } from 'react-bootstrap'
 import ProjectModal from '../modal/modal'
+import {Link} from 'react-router-dom'
 
 function ProjectForm(props) {
-
+    const  _id  = props.match.params.id
     const dispatch = useDispatch()
 
     const [title, setTitle] = useState('')
@@ -48,27 +49,26 @@ function ProjectForm(props) {
         setbudget(e.target.value);
         console.log("budget", budget);
     };
-    const handleNewPost = (e) => {
+    const handleNewEdit = (e) => {
         e.preventDefault();
         console.log("event ->>>>", e);
-        dispatch(handlepost({
+        dispatch(handleEdit({
             "title": title,
             "description": desc,
             "category": category,
             "budget": budget + "$",
             "isopen": true
-        },props.account.token));
+        },props.token,_id));
     };
 
 
 
     return (
-        <>   
-            {console.log('sdadadadad',props.account.token)}
+        <>
             {console.log(props.Modal)}
 
             <Card>
-                <Form onSubmit={handleNewPost} >
+                <Form onSubmit={handleNewEdit} >
                     <Form.Group>
                         <Form.Text>
                             New Project
@@ -118,7 +118,7 @@ function ProjectForm(props) {
                     <Form.Row>
 
 
-                        <Button type="submit"> Post</Button>
+                        <Button type="submit"> <Link style={{"color":"white"}} to={`/project/${_id}`}> Edit </Link></Button>
                     </Form.Row>
 
                 </Form>
@@ -134,7 +134,6 @@ function ProjectForm(props) {
 const mapStateToProps = (state) => ({
     newproject: state.projects.newproject,
     Modal: state.projects.Modal,
-    token: state.projects.sessionToken,
-    account: state.users.account
+    token: state.projects.sessionToken
 });
 export default connect(mapStateToProps)(ProjectForm);

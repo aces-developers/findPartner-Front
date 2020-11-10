@@ -1,20 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { Button, Table } from "react-bootstrap";
+import { Button, Table, ButtonGroup } from "react-bootstrap";
 import { connect, useDispatch } from "react-redux";
 import { Formik, Field, ErrorMessage } from "formik";
 import { Redirect } from "react-router";
-import {  getAllUserProjects } from "../../store/users/users.store";
-import { getAllApplied } from "../../store/projects/project.store";
-
+import { getAllApplied, getAllUserProjects } from "../../store/users/users.store";
+import { getproject } from "../../store/projects/project.store";
+import './myProjects.scss'
 function MyProjects(props) {
-    console.log('1111111props.setAllApplayed',props)
 
-    const  setAllUserProjects = props.setAllUserProjects;
-    const  setAllAppliedID = props.setAllAppliedID;
-    const  setAppliedProjects = props.setAppliedProjects;
-
-
+    const userPublishedProjects = props.userPublishedProjects;
+    const AllAppliedID = props.AllAppliedID;
     const tableHeadings = ['Project Name', 'Budget', 'Category', 'Location', 'Status'];
+    const [defaultData, setDefaultData] = useState(userPublishedProjects);
+    const [status, setStatus] = useState('status');
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -23,27 +21,44 @@ function MyProjects(props) {
         };
         loadApplayed()
 
-       
+
         const loadPublished = async () => {
-            await dispatch(getAllUserProjects());
+            await dispatch(getAllUserProjects())
+            .then(()=>{
+
+                setDefaultData(userPublishedProjects)
+            });
         };
         loadPublished()
-        
     }, []);
-    /**
-     * fsaasd
-     * @param {*} id 
-     */
-   const  getproject= async(id)=>{
-    await dispatch(getAllApplied());
-    }
+
     
+    const displayPublished = (data) => { setDefaultData(data) }
+    const statusHandler = (data) => { 
+        if(data === true){
+            setStatus('Open');
+        }else if(data === false){
+            setStatus('Closed');
+        }else{
+            //undefined
+            setStatus('');
+        }
+        }
+
+
     return (
         <>
-        {    console.log('setApplayed',setAllAppliedID.map(id=> getproject(id)))}
-        {/*{    console.log('setAllUserProjects',setAllUserProjects)}
-        {console.log('props.setAllApplayed',props.setAllApplayed)}
-            <Table responsive>
+            {    console.log('inside return  props.setAllAppliedID', AllAppliedID)}
+            {    console.log('inside return  props.userPublishedProjects', userPublishedProjects)}
+            {    console.log('inside return  props', props)}
+
+            <ButtonGroup size="lg" className="mb-2">
+                <Button onClick={()=> displayPublished(userPublishedProjects) } >Owner</Button>
+                <Button onClick={()=> displayPublished(AllAppliedID)} >Partner</Button>
+            </ButtonGroup>
+
+            
+            <Table responsive className="userprojects">
                 <thead>
                     <tr>
                         <th>#</th>
@@ -54,15 +69,15 @@ function MyProjects(props) {
                 </thead>
                 <tbody>
                     
-                    {props.setAllUserProjects.map( (project, index) => (
+                    {defaultData.map( (project, index) => (
                         <tr>
                             <td>{index + 1}</td>
 
                             <td key={index}>{project.title}</td>
                             <td key={index}>{project.budget}</td>
                             <td key={index}>{project.category.toUpperCase()}</td>
-                            <td key={index}>{project.location}</td>
-                            <td key={index}>{project.isopen}</td> 
+                            <td key={index}>{`${project.location}`}</td>
+                            <td key={index} className={`${project.isopen}`}>{()=>statusHandler(status)}</td> 
 
                         </tr>
                     ))}
@@ -71,15 +86,14 @@ function MyProjects(props) {
 
                 </tbody>
 
-            </Table>*/}
+            </Table>
         </>
     );
 
 }
 
 const mapStateToProps = (state) => ({
-    setAllAppliedID: state.users.setAllAppliedID,
-    setAppliedProjects: state.users.setAppliedProjects,
-    setAllUserProjects: state.users.setAllUserProjects
+    AllAppliedID: state.users.AllAppliedID,
+    userPublishedProjects: state.users.userPublishedProjects
 });
 export default connect(mapStateToProps)(MyProjects);

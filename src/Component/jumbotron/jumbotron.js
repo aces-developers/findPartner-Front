@@ -1,26 +1,20 @@
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import { Jumbotron, Button, Container } from "react-bootstrap";
 import { connect, useDispatch } from "react-redux";
-import {setAccount} from "../../store/users/users.store"
-
+import { setAccount } from "../../store/users/users.store";
 
 function Jumber(props) {
-//   const dispatch = useDispatch()
-//  useEffect(() => {
-//   if(localStorage){
-    
-//     let user =JSON.parse(localStorage.getItem('account'));
-//     dispatch(setAccount(user))
-//     console.log(props.users)
-//   }
-   
-//  }, [dispatch,props.users])
-    
-    
- 
- 
-  
-  
+  //   const dispatch = useDispatch()
+  //  useEffect(() => {
+  //   if(localStorage){
+
+  //     let user =JSON.parse(localStorage.getItem('account'));
+  //     dispatch(setAccount(user))
+  //     console.log(props.users)
+  //   }
+
+  //  }, [dispatch,props.users])
+
   const styles = {
     jumbotron: {
       height: 600,
@@ -84,9 +78,7 @@ function Jumber(props) {
 
 const mapStateToProps = (state) => ({
   users: state.users.account,
-  projetcs: state.projects.sessionToken
+  projetcs: state.projects.sessionToken,
 });
 
-
 export default connect(mapStateToProps)(Jumber);
-

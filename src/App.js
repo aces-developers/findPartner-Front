@@ -15,15 +15,18 @@ import projectForm from "./Component/newproject/project-form";
 import SignUp from './Component/signUp/signUp'
 import SignIn from './Component/singIn/signIn'
 import Users from "./Component/users/user";
-import CompleteSignup from './Component/accountInfo/accountInfo'
+//import CompleteSignup from './Component/accountInfo/accountInfo'
 import AboutUs from './Component/about/about'
 import Footer from './Component/footer/footer'
+import Detalis from  './Component/projects/projectDetails'
 import Dashboard from './Component/dashboard/dashboard'
-import MyProjects from './Component/myProjects/myProjects';
-
-
+import DetailedProject from './Component/detailedProject-owner/detailedProject'
 import {setAccount} from "./store/users/users.store"
 import useBeforeFirstRender from '../src/hooks/componentWillMount'
+import detailedProject from "./Component/detailedProject-owner/detailedProject";
+import EditProject from "./Component/edit-project/EditProject";
+import MyProjects from "./Component/myProjects/myProjects";
+
 
 const MyComponent = () => { 
   const dispatch = useDispatch();
@@ -34,7 +37,7 @@ const MyComponent = () => {
     
        let user =JSON.parse(localStorage.getItem('account'));
        console.log('for check',user)
-        //dispatch(setAccount(user))
+        dispatch(setAccount(user))
      
     }
   })
@@ -62,10 +65,6 @@ const MyComponent = () => {
 // }
 function AppWrapper() {
   const states = store.getState();
-  
-   
- 
-  
   return (
     <> 
 
@@ -98,14 +97,16 @@ function AppWrapper() {
               )}
             />
             <Route path="/projects" component={Projects} />
-
+            <Route path="/detalis/:_id" component={Detalis} />
             <Route path="/newprojects" component={projectForm} />
 
           {/* <Route path="/users" component={Users} /> */}
             <Route path="/SignIn" component={SignIn} />
             <Route path="/SignUp" component={SignUp} />
-            <Route path="/Regisration" component={CompleteSignup} />
+            {/*<Route path="/Regisration" component={CompleteSignup} />*/}
             <Route path="/AboutUs" component={AboutUs} />
+            <Route path="/project/:id" component={detailedProject} />
+            <Route path="/edit/:id" component={EditProject} />
             <Route path="/MyProjects" component={MyProjects} />
 
           </Switch>
@@ -120,3 +121,4 @@ const mapStateToProps = (state) => ({
 });
  connect(mapStateToProps)(MyComponent);
 export default AppWrapper;
+
