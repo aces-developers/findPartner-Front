@@ -13,12 +13,11 @@ const users = createSlice({
       userid: null,
     },
     message: null,
-    isValid:false,
+    isValid: false,
 
-    AllAppliedID:[],  
-  AppliedProjects:[],
-    userPublishedProjects:[]
-
+    AllAppliedID: [],
+    AppliedProjects: [],
+    userPublishedProjects: [],
   },
   reducers: {
     setUsers(state, action) {
@@ -44,21 +43,19 @@ const users = createSlice({
       console.log("setIsValid =====>", state.isValid);
     },
     setAllAppliedID(state, action) {
-        console.log("AllAppliedID action  =====>", action);
-        state.AllAppliedID = action.payload;
-        //state.AllAppliedID = action.payload.map(proj=>(proj.projectId));
-      },
-   
-      setUserPublishedProjects(state, action) {
-        console.log("userPublishedProjects action =====>", action);
-        state.userPublishedProjects = action.payload;
-      },
+      console.log("AllAppliedID action  =====>", action);
+      state.AllAppliedID = action.payload;
+      //state.AllAppliedID = action.payload.map(proj=>(proj.projectId));
+    },
 
-      
+    setUserPublishedProjects(state, action) {
+      console.log("userPublishedProjects action =====>", action);
+      state.userPublishedProjects = action.payload;
+    },
   },
 });
-const localhost = 'localhost:4000';
-let herokuapp = 'as-findpartner.herokuapp.com';
+const localhost = "localhost:4000";
+let herokuapp = "as-findpartner.herokuapp.com";
 export const loadUsers = () => async (dispatch, getState) => {
   console.log("loadUsers");
   axios
@@ -102,17 +99,15 @@ export const SignIn = (userdata) => async (dispatch, getState) => {
 
 export const IsExist = (userEmail) => async (dispatch, getState) => {
   console.log("setIsExist --> ", userEmail);
-  axios
-    .get(`https://${herokuapp}/useremail/${userEmail}`)
-    .then((res) => {
-      // handle success
-      console.log(" handle IsExist success-->", res.data);
-      if (res.data.length !== 0) {
-        dispatch(setMessage("y"));
-      } else {
-        dispatch(setMessage("z"));
-      }
-    });
+  axios.get(`https://${herokuapp}/useremail/${userEmail}`).then((res) => {
+    // handle success
+    console.log(" handle IsExist success-->", res.data);
+    if (res.data.length !== 0) {
+      dispatch(setMessage("y"));
+    } else {
+      dispatch(setMessage("z"));
+    }
+  });
 };
 
 export const SignUp = (usersData) => async (dispatch, getState) => {
@@ -130,50 +125,56 @@ export const SignUp = (usersData) => async (dispatch, getState) => {
     });
 };
 
-
 export const getAllApplied = (props) => async (dispatch, getState) => {
-
-    const config = {
-       headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhpZGF5YS1TeWFtIiwiaWF0IjoxNjA0OTk0Mjk5fQ.GBLz3447XaaI50QRlPzzNMP_rCdkK9SWwHZ4t-elhtU` }
+  const config = {
+    headers: {
+      Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhpZGF5YS1TeWFtIiwiaWF0IjoxNjA0OTk0Mjk5fQ.GBLz3447XaaI50QRlPzzNMP_rCdkK9SWwHZ4t-elhtU`,
+    },
     //  headers: { Authorization: `Bearer ${token}` }
   };
-     axios.get(`https://${herokuapp}/allapply`, config)
-      .then((res) => {
-        console.log(" getAllApplyed success-->", res.data);
-        dispatch(setAllAppliedID(res.data))
+  axios
+    .get(`https://${herokuapp}/allapply`, config)
+    .then((res) => {
+      console.log(" getAllApplyed success-->", res.data);
+      dispatch(setAllAppliedID(res.data));
     })
-      .catch((error) => {
-        console.log(error);
-      });
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+export const getAllUserProjects = () => async (dispatch, getState) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhpZGF5YS1TeWFtIiwiaWF0IjoxNjA0OTY4OTIwfQ.x4yXsMb23-EBUhOPKcD8BMcUgRnaBLBcInQlHhpDzRk`,
+    },
+    //   headers: { Authorization: `Bearer ${token}` }
   };
 
-  export const getAllUserProjects = () => async (dispatch, getState) => {
-   
- 
-     const config = {
-       headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhpZGF5YS1TeWFtIiwiaWF0IjoxNjA0OTY4OTIwfQ.x4yXsMb23-EBUhOPKcD8BMcUgRnaBLBcInQlHhpDzRk` }
-    //   headers: { Authorization: `Bearer ${token}` }
-   };
-        
-     axios.get(
-         `https://${herokuapp}/userprojects`,
-         //bodyParameters,
-         config
-       )
-       .then((res) => {
-         // handle success
-         console.log(" getAllUserProjects success-->", res.data);
-         dispatch(setUserPublishedProjects(res.data));
-       })
-       .catch((error) => {
-         // handle error
-         console.log(error);
-       });
-   };
+  axios
+    .get(
+      `https://${herokuapp}/userprojects`,
+      //bodyParameters,
+      config
+    )
+    .then((res) => {
+      // handle success
+      console.log(" getAllUserProjects success-->", res.data);
+      dispatch(setUserPublishedProjects(res.data));
+    })
+    .catch((error) => {
+      // handle error
+      console.log(error);
+    });
+};
 
-
-
-   
-export const {setAllAppliedID,setIsValid, setMessage, setUsers, setAccount ,setUserPublishedProjects} = users.actions;
+export const {
+  setAllAppliedID,
+  setIsValid,
+  setMessage,
+  setUsers,
+  setAccount,
+  setUserPublishedProjects,
+} = users.actions;
 
 export default users.reducer;

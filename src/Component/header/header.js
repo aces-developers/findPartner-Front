@@ -32,9 +32,11 @@ function Header(props) {
               <Nav.Item className="mr-4 routeLink">
                 BROWSE POTENTIAL PARTNERS
               </Nav.Item>
-              <Nav.Link className="mr-4" href="#pricing">
-                  <Link to="/MyProjects">  My Projects </Link>
-              </Nav.Link>
+              <Nav.Item className="mr-4" href="#pricing">
+                <Link className="routeLink" to="/MyProjects">
+                  MY PROJECTS
+                </Link>
+              </Nav.Item>
               <Nav.Item className="mr-4">
                 <Link className="routeLink" to="/AboutUs">
                   ABOUT US
@@ -67,4 +69,3 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps)(Header);
-
