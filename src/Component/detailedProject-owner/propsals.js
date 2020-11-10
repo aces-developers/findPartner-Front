@@ -1,27 +1,41 @@
-import React, { Component } from 'react'
-import { Card } from 'react-bootstrap'
+import React, { Component, useEffect } from 'react'
+import {Card, Container } from 'react-bootstrap'
 import { connect, useDispatch } from 'react-redux'
+//import Card from "../projects/card/p-Card";
 
+export const Propsals = (props) => {
+    console.log('2234567890',props.props)
 
-export const Propsals = () => {
     return (
-        <><Card style={{ width: '18rem' }}>
-            <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-                <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>
-                <Card.Text>
-                    Some quick example text to build on the card title and make up the bulk of
-                    the card's content.
-          </Card.Text>
-            </Card.Body>
-        </Card>
-            
+
+        <>
+            {props.props.proposalData &&
+                <div>
+                    {props.props.proposalData.map((item, index) => {
+                        return (
+                            <div key={index}>
+                                <Card className="card-style">
+                                    <Card.Body className="body-style">
+                                        <Card.Text>{item.proposal}</Card.Text>
+                                        <Card.Text>{item.username}</Card.Text>
+                                    </Card.Body>
+                                </Card>
+                            </div>
+                        )
+                    })}
+
+                </div>
+            }
+
+
         </>
     )
 }
 
-const mapStateToProps = (state) => ({
 
+const mapStateToProps = (state) => ({
+    proposalData: state.projects.proposalData,
+    account: state.users.account,
 })
 
 
