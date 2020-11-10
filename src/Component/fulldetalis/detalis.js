@@ -4,6 +4,8 @@ import { connect, useDispatch } from "react-redux";
 import DetailedProject from '../detailedProject-owner/detailedProject'
 import Details from '../projects/projectDetails'
 import { getproject } from '../../store/projects/project.store'
+import { getProposal } from "../../store/projects/project.store";
+
 function Homedetails(props) {
     const dispatch = useDispatch();
     const _id = props.match.params._id
@@ -15,7 +17,27 @@ function Homedetails(props) {
             await dispatch(getproject(_id));
         };
         load();
+        console.log("hellllllllo", props.match.params._id);
+        console.log('bye',props.account.token)
+        const anything = async () => {
+
+            await dispatch(getProposal(props.match.params._id, props.account.token));
+        };
+
+        anything();
+
     }, []);
+
+    // useEffect(() => {
+        // console.log("hellllllllo", props.match.params._id);
+        // console.log('bye',props.account.token)
+    //     const anything = async () => {
+
+    //         await dispatch(getProposal(props.match.params._id, props.account.token));
+    //     };
+
+    //     anything();
+    // }, [dispatch]);
 
     return (
         <>
@@ -41,8 +63,8 @@ const mapStateToProps = (state) => ({
     projectData: state.projects.projectData,
     deleteModal:state.projects.deleteModal,
     account:state.users.account,
-    check:state.projects.check
-    
+    check:state.projects.check,
+    proposalData: state.projects.proposalData
 
 })
 

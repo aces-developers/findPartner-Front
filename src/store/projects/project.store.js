@@ -12,7 +12,8 @@ const projects = createSlice({
     Modal: false,
     deleteModal:false,
     sessionToken:'',
-    check:false
+    check:false,
+    proposalData:null
   },
   reducers: {
     setprojectData(state, action) {
@@ -55,6 +56,10 @@ const projects = createSlice({
       console.log("setcheck=====>", action);
       state.check = action.payload;
     },
+    setProposalData(state,action){
+      console.log("setProposalData =====>", action);
+      state.proposalData = action.payload;
+    }
     
   },
 });
@@ -273,6 +278,28 @@ export const deleteProject = (body,token) => async (dispatch, getState) => {
       console.log(error);
     });
 };
-export const {setprojectData, setProjects, setSearchResult, setNewProject, setModal, setSession ,setDeleteModal,setcheck ,setAllAppliedID} = projects.actions;
-// export const { setProjects, setSearchResult,setNewProject,setModal,setSession,setDetails} = projects.actions;
+
+export const getProposal = (projectId,token) => async (dispatch, getState) => {
+  let config = {
+    // headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhpZGF5YS1TeWFtIiwiaWF0IjoxNjA0Njg5NTgzfQ.08VecrnTBaSvjG-UX5eC8QxYSMaUW64YL6-YkISQ3sY` }
+    headers: { Authorization: `Bearer ${token}` },
+};
+
+  console.log('getProposal ---> ', projectId)
+  // `https://as-findpartner.herokuapp.com/proposal/${projectId}`
+  axios
+    .get(
+     `https://as-findpartner.herokuapp.com/proposal/${projectId}`,config)
+    .then((res) => {
+      // handle success
+     // if (res.data) { dispatch(setModal(true)) }
+      console.log(" getProposal success-->", res.data);
+      dispatch( setProposalData(res.data));
+    })
+    .catch((error) => {
+      // handle error
+      console.log(error);
+    });
+};
+export const {setprojectData,setProposalData, setProjects, setSearchResult, setNewProject, setModal, setSession ,setDeleteModal,setcheck,setAllAppliedID } = projects.actions;
 export default projects.reducer;
