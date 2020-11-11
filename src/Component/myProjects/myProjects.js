@@ -23,7 +23,7 @@ function MyProjects(props) {
   const dispatch = useDispatch();
   useEffect(() => {
     props.userPublishedProjects?setflag(props.userPublishedProjects): setflag(localStorage.getItem(JSON.parse('MINE')))
-  }, [])
+  }, [props.userPublishedProjects])
 
   
 
