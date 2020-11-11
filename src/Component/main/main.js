@@ -17,11 +17,10 @@ import Detalis from "../projects/projectDetails";
 // import Dashboard from "../dashboard/dashboard";
 import detailedProject from "../detailedProject-owner/detailedProject";
 import EditProject from "../edit-project/EditProject";
-
 import { setAccount } from "../../store/users/users.store";
 import { useDispatch } from "react-redux";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Chat from "../Chat/Chat"
+import Chat from "../Chat/Chat";
 
 function Main(props) {
   const dispatch = useDispatch();
@@ -61,7 +60,6 @@ function Main(props) {
         <Route path="/edit/:id" component={EditProject} />
         <Route path="/chat" component={Chat} />
         <Route path="/MyProjects" component={MyProjects} />
-
       </Switch>
       <Footer />
     </div>

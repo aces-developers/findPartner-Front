@@ -1,20 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Jumbotron, Button, Container } from "react-bootstrap";
-import { connect, useDispatch } from "react-redux";
-import { setAccount } from "../../store/users/users.store";
+import { Link } from "react-router-dom";
+
+import { connect } from "react-redux";
 
 function Jumber(props) {
-  //   const dispatch = useDispatch()
-  //  useEffect(() => {
-  //   if(localStorage){
-
-  //     let user =JSON.parse(localStorage.getItem('account'));
-  //     dispatch(setAccount(user))
-  //     console.log(props.users)
-  //   }
-
-  //  }, [dispatch,props.users])
-
   const styles = {
     jumbotron: {
       height: 600,
@@ -65,10 +55,15 @@ function Jumber(props) {
             If opportunity doesn't knock we will open a door
           </p>
           <p>
-            <Button className="btn" style={styles.btn}>
-              Find a Partner
-            </Button>
-            <Button style={styles.btn2}>Join a Project</Button>
+            <Link to="/signup">
+              <Button className="btn" style={styles.btn}>
+                Find a Partner
+              </Button>
+            </Link>
+
+            <Link to="/signup">
+              <Button style={styles.btn2}>Join a Project</Button>
+            </Link>
           </p>
         </Container>
       </Jumbotron>
