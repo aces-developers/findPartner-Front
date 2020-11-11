@@ -1,21 +1,38 @@
-
+// user adnan -> 10 sockets online
+const users = new Map();
 
 const socketHandler = (io) => {
+
+
   io.on("connect", (socket) => {
 
-    console.log("new connection", socket.id);
+  let id = socket.handshake.query.id;
+  users.set(id, socket.id);
 
-    socket.on("join", (roomId) => {
-      console.log("join", roomId);
-      socket.join(roomId);
+    console.log("conatact id", id);
+
+    console.log("new connection", socket.id);
+    console.log("usersMap", users);
+
+    socket.on("join", (contactId) => {
+      console.log("join", contactId);
+      socket.join(contactId);
     });
 
-    socket.on("code", ({ projectId, code }) => {
-      socket.to(projectId).broadcast.emit("code", code);
+    socket.on("message", ({ sender, recipients, text }) => {
+      console.log("new message on the server", recipients, text);
+      recipients.forEach((contactId) => {
+        const socketId = users.get(contactId);
+        socket.to(socketId).broadcast.emit("message", { text, sender, recipients });
+      })
     });
 
     socket.on("disconnect", () => {
       console.log("connection disconnected", socket.id);
+      users.forEach((socketId, id) => {
+        if (socketId === socket.id) users.clear(id);
+        console.log("id", id, " logged out");
+      })
     });
 
   });
@@ -79,4 +96,3 @@ const PORT = process.env.PORT || 3001;
  httpServer.listen(PORT, () => {
       console.log(`server started - ${PORT}`);
     });
-
