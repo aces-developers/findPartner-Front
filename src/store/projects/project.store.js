@@ -274,6 +274,7 @@ export const deleteProject = (body, token) => async (dispatch, getState) => {
       // handle success
 
       console.log(" delproject success-->", res);
+      history.push("/");
     })
     .catch((error) => {
       // handle error
