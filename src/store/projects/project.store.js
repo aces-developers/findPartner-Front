@@ -282,14 +282,13 @@ export const deleteProject = (body, token) => async (dispatch, getState) => {
     });
 };
 
-export const getProposal = (projectId, token) => async (dispatch, getState) => {
+export const getProposal = (projectId) => async (dispatch, getState) => {
+  let token = JSON.parse(localStorage.getItem("token"));
+  console.log("token -----....", token);
   let config = {
-    // headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhpZGF5YS1TeWFtIiwiaWF0IjoxNjA0Njg5NTgzfQ.08VecrnTBaSvjG-UX5eC8QxYSMaUW64YL6-YkISQ3sY` }
     headers: { Authorization: `Bearer ${token}` },
   };
-
-  console.log("getProposal ---> ", projectId);
-  // `https://as-findpartner.herokuapp.com/proposal/${projectId}`
+  console.log("projectId Proposal ---> ", projectId);
   axios
     .get(`https://as-findpartner.herokuapp.com/proposal/${projectId}`, config)
     .then((res) => {
@@ -300,7 +299,7 @@ export const getProposal = (projectId, token) => async (dispatch, getState) => {
     })
     .catch((error) => {
       // handle error
-      console.log(error);
+      console.log(error.message);
     });
 };
 export const {
