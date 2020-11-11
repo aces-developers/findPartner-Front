@@ -47,8 +47,7 @@ function Regisration(props) {
         }, 4000);
       }}
       initialValues={{
-        // email: props.location.state.email,
-        email: "",
+        email: props.location.state.email,
         fullname: "",
         username: "",
         location: "Jordan",

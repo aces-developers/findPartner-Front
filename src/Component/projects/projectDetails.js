@@ -69,10 +69,11 @@ function Details(props) {
             <Formik
               validationSchema={Schema}
               onSubmit={async (values, { setSubmitting }) => {
-                await dispatch(apply(props.location.state._id, values));
+                console.log("apply submit");
+                await dispatch(apply(_id, values));
                 //console.log('  isValid: state.users.isValid,', props.isValid);
                 setTimeout(() => {
-                  props.history.push("/");
+                  // props.history.push("/");
                 }, 4000);
               }}
               initialValues={{
