@@ -6,8 +6,6 @@ import * as Yup from "yup";
 import { SignUp } from "../../store/users/users.store";
 import { getListOfcountries } from "../../store/users/users.store";
 
-import history from "../../history/history";
-
 const SignUpSchema = Yup.object().shape({
   fullname: Yup.string()
     .min(2, "Too Short!")
@@ -215,7 +213,7 @@ function Regisration(props) {
                           <option value="business">Business</option>
                           <option value="communications">Communications</option>
                           <option value="community">Community</option>
-                          <option value="cducation">Education</option>
+                          <option value="education">Education</option>
                           <option value="science">Science</option>
                           <option value="farming">Farming</option>
                           <option value="health">Health</option>

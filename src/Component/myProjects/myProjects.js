@@ -24,10 +24,10 @@ function MyProjects(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const loadApplayed = async () => {
-      await dispatch(getAllApplied());
-    };
-    loadApplayed();
+    // const loadApplayed = async () => {
+    //   await dispatch(getAllApplied());
+    // };
+    // loadApplayed();
 
     const loadPublished = async () => {
       await dispatch(getAllUserProjects()).then(() => {
