@@ -139,11 +139,15 @@ export const SignUp = (usersData) => async (dispatch, getState) => {
 };
 
 export const getAllApplied = (props) => async (dispatch, getState) => {
+
+  
+  let token = getState().users.account.token
+
   const config = {
-    headers: {
-      Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhpZGF5YS1TeWFtIiwiaWF0IjoxNjA0OTk0Mjk5fQ.GBLz3447XaaI50QRlPzzNMP_rCdkK9SWwHZ4t-elhtU`,
-    },
-    //  headers: { Authorization: `Bearer ${token}` }
+    // headers: {
+    //   Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhpZGF5YS1TeWFtIiwiaWF0IjoxNjA0OTk0Mjk5fQ.GBLz3447XaaI50QRlPzzNMP_rCdkK9SWwHZ4t-elhtU`,
+    // },
+     headers: { Authorization: `Bearer ${token}` }
   };
   axios
     .get(`https://as-findpartner.herokuapp.com/allapply`, config)
@@ -157,23 +161,29 @@ export const getAllApplied = (props) => async (dispatch, getState) => {
 };
 
 export const getAllUserProjects = () => async (dispatch, getState) => {
+  const state = getState()
+  let token = getState().users.account.token
+  console.log('dis is ',token)
+
+  
   const config = {
-    headers: {
-      Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhpZGF5YS1TeWFtIiwiaWF0IjoxNjA0OTY4OTIwfQ.x4yXsMb23-EBUhOPKcD8BMcUgRnaBLBcInQlHhpDzRk`,
-    },
-    //   headers: { Authorization: `Bearer ${token}` }
+    // headers: {
+    //   Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhpZGF5YS1TeWFtIiwiaWF0IjoxNjA0OTY4OTIwfQ.x4yXsMb23-EBUhOPKcD8BMcUgRnaBLBcInQlHhpDzRk`,
+    // },
+      headers: { Authorization: `Bearer ${token}` }
   };
 
+  console.log('sdad',token)
   axios
     .get(
       `https://as-findpartner.herokuapp.com/userprojects`,
-      //bodyParameters,
       config
     )
     .then((res) => {
       // handle success
       console.log(" getAllUserProjects success-->", res.data);
       dispatch(setUserPublishedProjects(res.data));
+      localStorage.setItem("MINE",JSON.stringify(res.data))
     })
     .catch((error) => {
       // handle error

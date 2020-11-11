@@ -288,7 +288,7 @@ export const getProposal = (projectId) => async (dispatch, getState) => {
   let config = {
     headers: { Authorization: `Bearer ${token}` },
   };
-  console.log("projectId Proposal ---> ", projectId);
+
   axios
     .get(`https://as-findpartner.herokuapp.com/proposal/${projectId}`, config)
     .then((res) => {

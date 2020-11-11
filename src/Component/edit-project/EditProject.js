@@ -63,6 +63,9 @@ function ProjectForm(props) {
     }
   };
 
+   function Capitalize(str){
+    return str.charAt(0).toUpperCase() + str.slice(1);
+    }
   const [saved, setsaved] = useState(false);
 
   const handleNewEdit = (e) => {
@@ -158,8 +161,8 @@ function ProjectForm(props) {
                         name="location"
                         defaultValue={location}
                       >
-                        <option>jordan</option>
-                        <option>gaza</option>
+                        <option>Jordan</option>
+                        <option>Gaza</option>
                         <option>Neverland</option>
                       </Form.Control>
                     </Form.Group>
