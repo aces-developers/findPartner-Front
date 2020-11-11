@@ -10,8 +10,8 @@ import {
 import { getproject } from "../../store/projects/project.store";
 import "./myProjects.scss";
 function MyProjects(props) {
-  const userPublishedProjects = props.userPublishedProjects;
-  const AllAppliedID = props.AllAppliedID;
+  // const userPublishedProjects = props.userPublishedProjects;
+  // const AllAppliedID = props.AllAppliedID;
   const tableHeadings = [
     "Project Name",
     "Budget",
@@ -19,9 +19,13 @@ function MyProjects(props) {
     "Location",
     "Status",
   ];
-  const [defaultData, setDefaultData] = useState(userPublishedProjects);
-  const [status, setStatus] = useState("status");
+  const [flag, setflag] = useState(props.userPublishedProjects)
   const dispatch = useDispatch();
+  useEffect(() => {
+    props.userPublishedProjects?setflag(props.userPublishedProjects): setflag(localStorage.getItem(JSON.parse('MINE')))
+  }, [])
+
+  
 
   useEffect(() => {
     const loadApplayed = async () => {
@@ -30,45 +34,30 @@ function MyProjects(props) {
     loadApplayed();
 
     const loadPublished = async () => {
-      await dispatch(getAllUserProjects()).then(() => {
-        setDefaultData(userPublishedProjects);
-      });
+      await dispatch(getAllUserProjects())
+       
+     
     };
     loadPublished();
   }, []);
 
-  const displayPublished = (data) => {
-    setDefaultData(data);
-  };
-  const statusHandler = (data) => {
-    if (data === true) {
-      setStatus("Open");
-    } else if (data === false) {
-      setStatus("Closed");
-    } else {
-      //undefined
-      setStatus("");
-    }
-  };
+  const changeFlag = (data) => { setflag(data) }
+    
+
+
 
   return (
     <>
-      {console.log("inside return  props.setAllAppliedID", AllAppliedID)}
-      {console.log(
-        "inside return  props.userPublishedProjects",
-        userPublishedProjects
-      )}
-      {console.log("inside return  props", props)}
-
+     
       <ButtonGroup size="lg" className="mb-2 switchGroupBtns">
         <Button
-          onClick={() => displayPublished(userPublishedProjects)}
+          onClick={() => changeFlag(props.userPublishedProjects)}
           className="btn btn-primary btn-lg"
         >
           Owner
         </Button>
         <Button
-          onClick={() => displayPublished(AllAppliedID)}
+        onClick={() => changeFlag(props.AllAppliedID)}
           className="btn btn-secondary btn-lg"
         >
           Partner
@@ -84,26 +73,28 @@ function MyProjects(props) {
           <tr>
             <th>#</th>
             {tableHeadings.map((_, index) => (
-              <th key={index}>{_}</th>
+              <th key={index * 100}>{_}</th>
             ))}
           </tr>
         </thead>
         <tbody>
-          {defaultData.map((project, index) => (
+          {  flag.map((project, index) => (
             <tr>
-              <td>{index + 1}</td>
+              <td>{index }</td>
 
               <td key={index}>{project.title}</td>
               <td key={index}>{project.budget}</td>
               <td key={index}>{project.category.toUpperCase()}</td>
-              <td key={index}>{`${project.location}`}</td>
+              <td key={index}>{`${project.lacation}`}</td>
               <td key={index} className={`${project.isopen}`}>
-                {() => statusHandler(status)}
+              {project.isopen?'open':'closed'}
               </td>
             </tr>
           ))}
         </tbody>
       </Table>
+
+  
     </>
   );
 }
@@ -111,5 +102,6 @@ function MyProjects(props) {
 const mapStateToProps = (state) => ({
   AllAppliedID: state.users.AllAppliedID,
   userPublishedProjects: state.users.userPublishedProjects,
+  account:state.users.account
 });
 export default connect(mapStateToProps)(MyProjects);
