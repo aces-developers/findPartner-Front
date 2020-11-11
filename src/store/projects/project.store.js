@@ -186,6 +186,9 @@ export const handleEdit = (bod, token, id) => async (dispatch, getState) => {
 //export const { setAllAppliedID} = projects.actions;
 
 export const apply = (id, propsal) => async (dispatch, getState) => {
+  console.log("propsal ------->", propsal);
+  console.log("_id ------->", id);
+  // const userid = getState.users.account.userid;
   const config = {
     headers: {
       Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhpZGF5YS1TeWFtIiwiaWF0IjoxNjA0ODU2MTA2fQ.7BRVrqCZeWO1rpWUQ1gO7CfgHFWz5YujfnUWL9RCw7Y`,
@@ -194,7 +197,6 @@ export const apply = (id, propsal) => async (dispatch, getState) => {
 
   //const bodyParameters = bod
 
-  console.log("apply---> ", id, "---", propsal);
   axios
     .post(`https://as-findpartner.herokuapp.com/apply/${id}`, propsal, config)
     .then((res) => {
@@ -202,6 +204,7 @@ export const apply = (id, propsal) => async (dispatch, getState) => {
       // if (res.data) { dispatch(setModal(true)) }
       console.log(" apply success-->", res.data);
       //dispatch(setNewProject(res.data));
+      history.push("/");
     })
     .catch((error) => {
       // handle error
