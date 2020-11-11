@@ -19,7 +19,7 @@ function ProjectForm(props) {
       setTitle(props.projectData.title);
       setDescription(props.projectData.description);
       setlocation(props.projectData.location);
-      setskills(props.projectData.skills);
+      setskills(props.projectData.skill);
       setbudget(props.projectData.budget);
       setcategory(props.projectData.category);
     }
@@ -77,13 +77,13 @@ function ProjectForm(props) {
           budget: budget + "$",
           isopen: true,
           location: location,
+          skill: skills,
         },
         props.account.token,
         _id
       )
     );
     setsaved(true);
-    history.push(`/detalis/${_id}`);
   };
 
   return (

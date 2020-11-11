@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { Redirect } from "react-router-dom";
+import history from "../../history/history";
+
 const projects = createSlice({
   name: "projects",
   initialState: {
@@ -113,6 +114,8 @@ export const handlepost = (bod, token, id) => async (dispatch, getState) => {
     headers: { Authorization: `Bearer ${token}` },
   };
   console.log("token", token);
+  console.log("post data ------->", bod);
+
   const bodyParameters = bod;
 
   axios
@@ -155,6 +158,7 @@ export const handleEdit = (bod, token, id) => async (dispatch, getState) => {
       // handle success
       console.log(" handleEdit success-->", res.data);
       dispatch(setNewProject(res.data));
+      history.push(`/detalis/${id}`);
     })
     .catch((error) => {
       // handle error
