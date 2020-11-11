@@ -108,19 +108,19 @@ export const handleSearch = (q, search) => async (dispatch, getState) => {
       console.log(error);
     });
 };
-export const handlepost = (bod, token, id) => async (dispatch, getState) => {
+export const handlepost = (body) => async (dispatch, getState) => {
+  let token = getState().users.account.token;
+  console.log("bod ----->", body);
+  console.log("token ----->", token);
+
   const config = {
-    // headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhpZGF5YS1TeWFtIiwiaWF0IjoxNjA0Njg5NTgzfQ.08VecrnTBaSvjG-UX5eC8QxYSMaUW64YL6-YkISQ3sY` }
     headers: { Authorization: `Bearer ${token}` },
   };
-  console.log("token", token);
-  console.log("post data ------->", bod);
-
-  const bodyParameters = bod;
+  const bodyParameters = body;
 
   axios
     .post(
-      `https://as-findpartner.herokuapp.com/newproject`,
+      "https://as-findpartner.herokuapp.com/newproject",
       bodyParameters,
       config
     )
@@ -137,6 +137,7 @@ export const handlepost = (bod, token, id) => async (dispatch, getState) => {
       console.log(error);
     });
 };
+
 export const handleEdit = (bod, token, id) => async (dispatch, getState) => {
   console.log("data ---->", bod);
   const config = {
