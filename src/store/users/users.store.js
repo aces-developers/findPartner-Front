@@ -197,9 +197,10 @@ export const getListOfcountries = () => async (dispatch, getState) => {
     .then((res) => {
       // handle success
       let countries = res.data.map((e) => {
-        return e.name;
+        return e.name ;
       });
-      dispatch(setListCountries(countries));
+      const result = countries.filter(word => word !== 'Israel');
+      dispatch(setListCountries(result));
     })
     .catch((error) => {
       console.log(error);

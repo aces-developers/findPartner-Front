@@ -35,7 +35,7 @@ function Signin(props) {
                   <Form.Control
                     name="username"
                     type="text"
-                    placeholder="ex: John@gmail.com"
+                    placeholder="ex: Elon musk"
                     className="mb-2"
                   />
                   <Form.Control
