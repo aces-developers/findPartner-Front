@@ -29,80 +29,69 @@ export const Details = (props) => {
   };
   return (
     <>
-      <Container>
-        <Row className="justify-content-center">
-          <Col md={12}>
-            {props.props.projectData && (
-              <Card className="w-100 shadow-sm border-0">
-                <Card.Body>
-                  <Card.Title
-                    style={{ textTransform: "capitalize", color: "#333" }}
-                  >
-                    {props.props.projectData[0].title}
-                  </Card.Title>
-                  <Card.Text style={{ fontSize: 12, fontWeight: 300 }}>
-                    <FontAwesomeIcon
-                      icon={faUser}
-                      className="mr-2"
-                      style={{ color: "#00b4db" }}
-                    />
-                    {props.props.projectData[0]._ownerName}
-                  </Card.Text>
-                  <hr></hr>
+      {props.props.projectData && (
+        <Card className="w-100 m-0 rounded-bottom  border-0">
+          <Card.Body>
+            <Card.Title style={{ textTransform: "capitalize", color: "#333" }}>
+              {props.props.projectData.title}
+            </Card.Title>
+            <Card.Text style={{ fontSize: 12, fontWeight: 300 }}>
+              <FontAwesomeIcon
+                icon={faUser}
+                className="mr-2"
+                style={{ color: "#00b4db" }}
+              />
+              {props.props.projectData._ownerName}
+            </Card.Text>
+            <hr></hr>
 
-                  <Card.Text>
-                    {props.props.projectData[0].description}
-                  </Card.Text>
-                  <Card.Text
-                    className="mt-4"
-                    style={{ textTransform: "capitalize" }}
-                  >
-                    <FontAwesomeIcon
-                      icon={faTag}
-                      className="mr-2"
-                      style={{ color: "#f77d0e" }}
-                    />
-                    {props.props.projectData[0].category}{" "}
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            )}
-            <div className="d-flex mt-4 justify-content-end">
-              <Button
-                style={{
-                  width: "fit-content",
-                  fontWeight: 600,
-                  paddingLeft: 30,
-                  paddingRight: 30,
-                  marginBottom: 0,
-                }}
-                variant="secondary"
-                className="mr-4 con-linkedin"
-              >
-                <Link
-                  style={{ color: "white" }}
-                  to={`/edit/${props.props.match.params._id}`}
-                >
-                  Edit
-                </Link>
-              </Button>
-              <Button
-                style={{
-                  width: "fit-content",
-                  fontWeight: 600,
-                  paddingLeft: 30,
-                  paddingRight: 30,
-                }}
-                onClick={modalInitiate}
-                variant="secondary"
-              >
-                Delete
-              </Button>
-            </div>
-            <DelModals />
-          </Col>
-        </Row>
-      </Container>
+            <Card.Text>{props.props.projectData.description}</Card.Text>
+            <Card.Text className="mt-4" style={{ textTransform: "capitalize" }}>
+              <FontAwesomeIcon
+                icon={faTag}
+                className="mr-2"
+                style={{ color: "#f77d0e" }}
+              />
+              {props.props.projectData.category}{" "}
+            </Card.Text>
+          </Card.Body>
+        </Card>
+      )}
+      <div className="d-flex mt-4 justify-content-end">
+        <Link
+          style={{ color: "white" }}
+          to={`/edit/${props.props.match.params._id}`}
+        >
+          <Button
+            style={{
+              width: "fit-content",
+              fontWeight: 600,
+              paddingLeft: 35,
+              paddingRight: 35,
+              paddingTop: 7,
+              paddingBottom: 7,
+              marginBottom: 0,
+            }}
+            variant="secondary"
+            className="mr-4 con-linkedin"
+          >
+            Edit
+          </Button>
+        </Link>
+        <Button
+          style={{
+            width: "fit-content",
+            fontWeight: 600,
+            paddingLeft: 30,
+            paddingRight: 30,
+          }}
+          onClick={modalInitiate}
+          variant="secondary"
+        >
+          Delete
+        </Button>
+      </div>
+      <DelModals />
     </>
   );
 };

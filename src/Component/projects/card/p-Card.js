@@ -23,16 +23,16 @@ export default function Project(props) {
             <Card.Text>
               <img className="tag-style" src={tag} /> {props.Item.category}
             </Card.Text>
-            <Button className="card-link-style" variant="link">
-              <Link
-                to={{
-                  pathname: `/detalis/${props.Item._id}`,
-                  state: { _id: props.Item._id },
-                }}
-              >
+            <Link
+              to={{
+                pathname: `/detalis/${props.Item._id}`,
+                state: { _id: props.Item._id },
+              }}
+            >
+              <Button className="card-link-style" variant="link">
                 More Details
-              </Link>
-            </Button>
+              </Button>
+            </Link>
           </div>
         </Card.Body>
       </Card>

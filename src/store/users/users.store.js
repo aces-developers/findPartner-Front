@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { browserHistory } from "react-router";
-import { Redirect } from "react-router";
+import history from "../../history/history";
 
 const users = createSlice({
   name: "users",
@@ -52,6 +51,13 @@ const users = createSlice({
       console.log("userPublishedProjects action =====>", action);
       state.userPublishedProjects = action.payload;
     },
+    signOut(state, action) {
+      state.account.token = null;
+      state.account.username = null;
+      state.account.userid = null;
+      localStorage.clear();
+      history.push("/");
+    },
   },
 });
 const localhost = "localhost:4000";
@@ -72,7 +78,7 @@ export const loadUsers = () => async (dispatch, getState) => {
 };
 
 export const SignIn = (userdata) => async (dispatch, getState) => {
-  console.log(userdata);
+  console.log("userdata SignIn------->", userdata);
   axios
     .post(
       "https://as-findpartner.herokuapp.com/signin",
@@ -86,10 +92,11 @@ export const SignIn = (userdata) => async (dispatch, getState) => {
     )
     .then((res) => {
       // handle success
-      console.log(" handle success-->", res.data);
+      console.log(" handle SignIn success-->", res.data);
       dispatch(setAccount(res.data));
       localStorage.setItem("account", JSON.stringify(res.data));
       localStorage.setItem("token", JSON.stringify(res.data.token));
+      history.push("/");
     })
     .catch((error) => {
       // handle error
@@ -175,6 +182,7 @@ export const {
   setUsers,
   setAccount,
   setUserPublishedProjects,
+  signOut,
 } = users.actions;
 
 export default users.reducer;

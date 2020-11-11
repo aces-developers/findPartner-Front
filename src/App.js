@@ -1,15 +1,16 @@
 import "./App.css";
-import Main from "./component/main/main";
+import Main from "./Component/main/main";
 import React from "react";
 import { Provider } from "react-redux";
-import { BrowserRouter as Router } from "react-router-dom";
+import { Router } from "react-router-dom";
 import store from "./store/index";
+import history from "./history/history";
 
 function App(props) {
   return (
     <>
       <Provider store={store}>
-        <Router>
+        <Router history={history}>
           <Main />
         </Router>
       </Provider>

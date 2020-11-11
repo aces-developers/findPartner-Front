@@ -1,24 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { connect, useDispatch } from "react-redux";
-import { Nav, Form, Container } from "react-bootstrap";
+import { Form, Container, Tabs, Tab, Row, Col } from "react-bootstrap";
 import { Details } from "./details";
 import { Propsals } from "./propsals";
 import { ModalSwitch } from "./ModalSwitch";
 import { DeleteModal } from "./DeleteModel";
-import {
-  setModal,
-  getproject,
-  setcheck,
-} from "../../store/projects/project.store";
+import { setModal } from "../../store/projects/project.store";
 
 export const DetailedProject = (props) => {
-  function Page() {
-    if (view) {
-      return <Details props={props.props} />;
-    } else {
-      return <Propsals props={props.props} />;
-    }
-  }
   function Modals() {
     if (props.Modal) {
       return <ModalSwitch props={props} />;
@@ -27,53 +16,44 @@ export const DetailedProject = (props) => {
     } else return <></>;
   }
 
-  const [view, setview] = useState(true);
   const dispatch = useDispatch();
   const toggleEnabled = () => {
     dispatch(setModal(true));
   };
-  const openDetails = () => {
-    setview(true);
-  };
-  const openProposals = () => {
-    setview(false);
-  };
+
   const _id = props.props.match.params._id;
-  console.log(_id);
-  // useEffect(() => {
-  //   const load = async () => {
-  //     await dispatch(getproject(_id));
-  //     console.log('props--->props', props.props)
-
-  // };
-  // load();
-
-  // }, [dispatch])
 
   return (
     <>
       <div className="signup-section" style={{ minHeight: "70vh" }}>
         <Container>
-          {props.props.projectData && (
-            <Form>
-              <Form.Check
-                type="switch"
-                id="custom-switch"
-                label="Close project"
-                //  checked={props.props.check}
-                onChange={toggleEnabled}
-              />
-            </Form>
-          )}
-          <Nav variant="pills" defaultActiveKey="/home">
-            <Nav.Item>
-              <Nav.Link onClick={openDetails}>Details</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link onClick={openProposals}>Propasls</Nav.Link>
-            </Nav.Item>
-          </Nav>
-          <Page />
+          <Row className="justify-content-center">
+            <Col>
+              {props.props.projectData && (
+                <Form className="d-flex justify-content-end">
+                  <Form.Check
+                    type="switch"
+                    id="custom-switch"
+                    label="Open"
+                    onChange={toggleEnabled}
+                    checked={props.projectData.isopen}
+                  />
+                </Form>
+              )}
+              <Tabs
+                className="border-0"
+                defaultActiveKey="Details"
+                id="uncontrolled-tab-example"
+              >
+                <Tab className="border-0" eventKey="Details" title="Details">
+                  <Details props={props.props} />
+                </Tab>
+                <Tab className="border-0" eventKey="Propsals" title="Propsals">
+                  <Propsals props={props.props} />
+                </Tab>
+              </Tabs>
+            </Col>
+          </Row>
           <Modals />
         </Container>
       </div>
