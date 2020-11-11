@@ -66,6 +66,8 @@ function ProjectForm(props) {
           category: category,
           budget: budget + "$",
           isopen: true,
+          skill: skills,
+          lacation: location,
         },
         props.account.token
       )
