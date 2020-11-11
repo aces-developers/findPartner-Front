@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { connect, useDispatch } from "react-redux";
 import { handlepost } from "../../store/projects/project.store";
 import {
@@ -12,16 +11,19 @@ import {
   Container,
 } from "react-bootstrap";
 import ProjectModal from "../modal/modal";
+import { getListOfcountries } from "../../store/users/users.store";
 
 function ProjectForm(props) {
   const dispatch = useDispatch();
-
+  useEffect(() => {
+    dispatch(getListOfcountries());
+  }, []);
   const [title, setTitle] = useState("");
   const [desc, setdesc] = useState("");
-  const [location, setlocation] = useState("Choose a location");
+  const [location, setlocation] = useState("Jordan");
   const [skills, setskills] = useState("");
   const [budget, setbudget] = useState("");
-  const [category, setcategory] = useState("Choose a Categoty");
+  const [category, setcategory] = useState("IT");
 
   const onChangeDescField = (e) => {
     console.log(e);
@@ -34,13 +36,13 @@ function ProjectForm(props) {
     console.log("skill", skills);
   };
   const onFieldCategory = (e) => {
-    console.log(e);
-    setcategory(e);
+    console.log("onFieldCategory", e.target.value);
+    setcategory(e.target.value);
     console.log("category", category);
   };
   const onFieldLocation = (e) => {
-    console.log(e);
-    setlocation(e);
+    console.log("onFieldLocation", e.target.value);
+    setlocation(e.target.value);
     console.log("location", location);
   };
 
@@ -57,27 +59,22 @@ function ProjectForm(props) {
   };
   const handleNewPost = (e) => {
     e.preventDefault();
-    console.log("event ->>>>", e);
+
     dispatch(
-      handlepost(
-        {
-          title: title,
-          description: desc,
-          category: category,
-          budget: budget + "$",
-          isopen: true,
-          skill: skills,
-          lacation: location,
-        },
-        props.account.token
-      )
+      handlepost({
+        title: title,
+        description: desc,
+        category: category.toLocaleLowerCase(),
+        budget: budget + "$",
+        isopen: true,
+        skill: skills,
+        lacation: location,
+      })
     );
   };
 
   return (
     <>
-      {console.log("sdadadadad", props.account.token)}
-      {console.log(props.Modal)}
       <div className="signup-section" style={{ minHeight: "70vh" }}>
         <Container>
           <h4 className="mb-4" style={{ color: "#0083b0" }}>
@@ -108,20 +105,24 @@ function ProjectForm(props) {
                 <Form.Row>
                   <Form.Group as={Col} controlId="formGrid">
                     <Form.Label>Category</Form.Label>
-                    <DropdownButton
+                    <Form.Control
+                      as="select"
                       required="true"
-                      onSelect={onFieldCategory}
-                      id="dropdown-basic-button"
+                      onChange={onFieldCategory}
                       name="category"
-                      title={category}
-                      variant="secondary"
+                      value={category}
                     >
-                      <Dropdown.Item eventKey="it">IT</Dropdown.Item>
-                      <Dropdown.Item eventKey="engineering">
-                        Engineering
-                      </Dropdown.Item>
-                      <Dropdown.Item eventKey="arts">Arts</Dropdown.Item>
-                    </DropdownButton>
+                      <option>Engineering</option>
+                      <option>Arts</option>
+                      <option>Business</option>
+                      <option>Communications</option>
+                      <option>Community</option>
+                      <option>Education</option>
+                      <option>Science</option>
+                      <option>Farming</option>
+                      <option>Health</option>
+                      <option>IT</option>
+                    </Form.Control>
                   </Form.Group>
 
                   <Form.Group as={Col} controlId="formGrid">
@@ -137,19 +138,18 @@ function ProjectForm(props) {
                 <Form.Row>
                   <Form.Group as={Col} controlId="formGrid">
                     <Form.Label>Location</Form.Label>
-                    <DropdownButton
-                      onSelect={onFieldLocation}
-                      id="dropdown-basic-button"
+                    <Form.Control
+                      as="select"
+                      onChange={onFieldLocation}
                       name="location"
                       title={location}
                       variant="secondary"
+                      value={location}
                     >
-                      <Dropdown.Item eventKey="jordan">jordan</Dropdown.Item>
-                      <Dropdown.Item eventKey="gaza">gaza</Dropdown.Item>
-                      <Dropdown.Item eventKey="Neverland">
-                        Neverland
-                      </Dropdown.Item>
-                    </DropdownButton>
+                      {props.countries.map((country) => {
+                        return <option>{country}</option>;
+                      })}
+                    </Form.Control>
                   </Form.Group>
 
                   <Form.Group as={Col} controlId="formGrid">
@@ -176,7 +176,6 @@ function ProjectForm(props) {
               }}
               type="submit"
             >
-              {" "}
               Post
             </Button>
           </Form>
@@ -194,5 +193,6 @@ const mapStateToProps = (state) => ({
   Modal: state.projects.Modal,
   token: state.projects.sessionToken,
   account: state.users.account,
+  countries: state.users.countries,
 });
 export default connect(mapStateToProps)(ProjectForm);

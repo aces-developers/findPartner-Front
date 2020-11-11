@@ -18,7 +18,7 @@ function Homedetails(props) {
     load();
 
     const anything = async () => {
-      await dispatch(getProposal(props.match.params._id, props.account.token));
+      await dispatch(getProposal(_id));
     };
 
     anything();
