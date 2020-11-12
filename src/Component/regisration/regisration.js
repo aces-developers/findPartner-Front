@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Col, Row, Form, Button, Container, Card } from "react-bootstrap";
 import { connect, useDispatch } from "react-redux";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { SignUp } from "../../store/users/users.store";
+import { getListOfcountries } from "../../store/users/users.store";
 
 const SignUpSchema = Yup.object().shape({
   fullname: Yup.string()
@@ -28,6 +29,10 @@ const SignUpSchema = Yup.object().shape({
 function Regisration(props) {
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(getListOfcountries());
+  }, []);
+
   return (
     <Formik
       validationSchema={SignUpSchema}
@@ -36,7 +41,6 @@ function Regisration(props) {
         console.log("  isValid: state.users.isValid,", props.isValid);
         setTimeout(() => {
           if (props.isValid) {
-            props.history.push("./signin");
           }
         }, 4000);
       }}
@@ -44,8 +48,8 @@ function Regisration(props) {
         email: props.location.state.email,
         fullname: "",
         username: "",
-        location: "",
-        skillCat: "",
+        location: "Jordan",
+        skillCat: "health",
         password: "",
       }}
     >
@@ -100,14 +104,17 @@ function Regisration(props) {
                       >
                         <Form.Label>Location</Form.Label>
                         <Form.Control
-                          type="text"
-                          placeholder="Location"
+                          as="select"
                           name="location"
                           value={values.location}
                           onChange={handleChange}
                           isInvalid={!!errors.location}
                           className="mb-4"
-                        />
+                        >
+                          {props.countries.map((country) => {
+                            return <option value={country}>{country}</option>;
+                          })}
+                        </Form.Control>
 
                         <Form.Control.Feedback type="invalid" tooltip>
                           {errors.location}
@@ -196,42 +203,21 @@ function Regisration(props) {
                         <Form.Control
                           as="select"
                           onChange={handleChange}
-                          onBlur={handleBlur}
+                          // onBlur={handleBlur}
                           name="skillCat"
                           value={values.skillCat}
-                          id="dropdown-item-button"
                           className="mb-4"
                         >
-                          <option name="skillCat" value="engineering">
-                            Engineering
-                          </option>
-                          <option name="skillCat" value="arts">
-                            Arts
-                          </option>
-                          <option name="skillCat" value="business">
-                            Business
-                          </option>
-                          <option name="skillCat" value="communications">
-                            Communications
-                          </option>
-                          <option name="skillCat" value="community">
-                            Community
-                          </option>
-                          <option name="skillCat" value="cducation">
-                            Education
-                          </option>
-                          <option name="skillCat" value="science">
-                            Science
-                          </option>
-                          <option name="skillCat" value="farming">
-                            Farming
-                          </option>
-                          <option name="skillCat" value="health">
-                            Health
-                          </option>
-                          <option name="skillCat" value="it">
-                            IT
-                          </option>
+                          <option value="engineering">Engineering</option>
+                          <option value="arts">Arts</option>
+                          <option value="business">Business</option>
+                          <option value="communications">Communications</option>
+                          <option value="community">Community</option>
+                          <option value="education">Education</option>
+                          <option value="science">Science</option>
+                          <option value="farming">Farming</option>
+                          <option value="health">Health</option>
+                          <option value="it">IT</option>
                         </Form.Control>
                       </Form.Group>
                       <div className="d-flex mb-4">
@@ -257,6 +243,7 @@ function Regisration(props) {
 const mapStateToProps = (state) => ({
   message: state.users.message,
   isValid: state.users.isValid,
+  countries: state.users.countries,
 });
 
 export default connect(mapStateToProps)(Regisration);

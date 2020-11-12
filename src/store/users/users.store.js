@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { browserHistory } from "react-router";
-import { Redirect } from "react-router";
+import history from "../../history/history";
 
 const users = createSlice({
   name: "users",
@@ -18,6 +17,7 @@ const users = createSlice({
     AllAppliedID: [],
     AppliedProjects: [],
     userPublishedProjects: [],
+    countries: [],
   },
   reducers: {
     setUsers(state, action) {
@@ -52,14 +52,23 @@ const users = createSlice({
       console.log("userPublishedProjects action =====>", action);
       state.userPublishedProjects = action.payload;
     },
+    setListCountries(state, action) {
+      state.countries = action.payload;
+    },
+    signOut(state, action) {
+      state.account.token = null;
+      state.account.username = null;
+      state.account.userid = null;
+      localStorage.clear();
+      history.push("/");
+    },
   },
 });
-const localhost = "localhost:4000";
-let herokuapp = "as-findpartner.herokuapp.com";
+
 export const loadUsers = () => async (dispatch, getState) => {
   console.log("loadUsers");
   axios
-    .get(`https://${herokuapp}/users`)
+    .get(`https://as-findpartner.herokuapp.com/users`)
     .then((res) => {
       // handle success
       console.log(" handle success loadUsers -->", res.data);
@@ -72,7 +81,7 @@ export const loadUsers = () => async (dispatch, getState) => {
 };
 
 export const SignIn = (userdata) => async (dispatch, getState) => {
-  console.log(userdata);
+  console.log("userdata SignIn------->", userdata);
   axios
     .post(
       "https://as-findpartner.herokuapp.com/signin",
@@ -86,10 +95,11 @@ export const SignIn = (userdata) => async (dispatch, getState) => {
     )
     .then((res) => {
       // handle success
-      console.log(" handle success-->", res.data);
+      console.log(" handle SignIn success-->", res.data);
       dispatch(setAccount(res.data));
       localStorage.setItem("account", JSON.stringify(res.data));
       localStorage.setItem("token", JSON.stringify(res.data.token));
+      history.push("/");
     })
     .catch((error) => {
       // handle error
@@ -99,41 +109,48 @@ export const SignIn = (userdata) => async (dispatch, getState) => {
 
 export const IsExist = (userEmail) => async (dispatch, getState) => {
   console.log("setIsExist --> ", userEmail);
-  axios.get(`https://${herokuapp}/useremail/${userEmail}`).then((res) => {
-    // handle success
-    console.log(" handle IsExist success-->", res.data);
-    if (res.data.length !== 0) {
-      dispatch(setMessage("y"));
-    } else {
-      dispatch(setMessage("z"));
-    }
-  });
+  axios
+    .get(`https://as-findpartner.herokuapp.com/useremail/${userEmail}`)
+    .then((res) => {
+      // handle success
+      console.log(" handle IsExist success-->", res.data);
+      if (res.data.length !== 0) {
+        dispatch(setMessage("y"));
+      } else {
+        dispatch(setMessage("z"));
+      }
+    });
 };
 
 export const SignUp = (usersData) => async (dispatch, getState) => {
   console.log("usersData --> ", usersData);
   axios
-    .post(`https://${herokuapp}/signup`, usersData)
+    .post(`https://as-findpartner.herokuapp.com/signup`, usersData)
     .then((res) => {
       // handle success
       console.log(" handle success-->", res.data);
       dispatch(setIsValid(true));
+      history.push("/signin");
     })
     .catch((error) => {
       // handle error
-      console.log(error);
+      console.log(error.message);
     });
 };
 
 export const getAllApplied = (props) => async (dispatch, getState) => {
+
+  
+  let token = getState().users.account.token
+
   const config = {
-    headers: {
-      Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhpZGF5YS1TeWFtIiwiaWF0IjoxNjA0OTk0Mjk5fQ.GBLz3447XaaI50QRlPzzNMP_rCdkK9SWwHZ4t-elhtU`,
-    },
-    //  headers: { Authorization: `Bearer ${token}` }
+    // headers: {
+    //   Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhpZGF5YS1TeWFtIiwiaWF0IjoxNjA0OTk0Mjk5fQ.GBLz3447XaaI50QRlPzzNMP_rCdkK9SWwHZ4t-elhtU`,
+    // },
+     headers: { Authorization: `Bearer ${token}` }
   };
   axios
-    .get(`https://${herokuapp}/allapply`, config)
+    .get(`https://as-findpartner.herokuapp.com/allapply`, config)
     .then((res) => {
       console.log(" getAllApplyed success-->", res.data);
       dispatch(setAllAppliedID(res.data));
@@ -144,26 +161,48 @@ export const getAllApplied = (props) => async (dispatch, getState) => {
 };
 
 export const getAllUserProjects = () => async (dispatch, getState) => {
+  const state = getState()
+  let token = getState().users.account.token
+  console.log('dis is ',token)
+
+  
   const config = {
-    headers: {
-      Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhpZGF5YS1TeWFtIiwiaWF0IjoxNjA0OTY4OTIwfQ.x4yXsMb23-EBUhOPKcD8BMcUgRnaBLBcInQlHhpDzRk`,
-    },
-    //   headers: { Authorization: `Bearer ${token}` }
+    // headers: {
+    //   Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhpZGF5YS1TeWFtIiwiaWF0IjoxNjA0OTY4OTIwfQ.x4yXsMb23-EBUhOPKcD8BMcUgRnaBLBcInQlHhpDzRk`,
+    // },
+      headers: { Authorization: `Bearer ${token}` }
   };
 
+  console.log('sdad',token)
   axios
     .get(
-      `https://${herokuapp}/userprojects`,
-      //bodyParameters,
+      `https://as-findpartner.herokuapp.com/userprojects`,
       config
     )
     .then((res) => {
       // handle success
       console.log(" getAllUserProjects success-->", res.data);
       dispatch(setUserPublishedProjects(res.data));
+      localStorage.setItem("MINE",JSON.stringify(res.data))
     })
     .catch((error) => {
       // handle error
+      console.log(error);
+    });
+};
+
+export const getListOfcountries = () => async (dispatch, getState) => {
+  axios
+    .get(`https://restcountries.eu/rest/v2/all`)
+    .then((res) => {
+      // handle success
+      let countries = res.data.map((e) => {
+        return e.name ;
+      });
+      const result = countries.filter(word => word !== 'Israel');
+      dispatch(setListCountries(result));
+    })
+    .catch((error) => {
       console.log(error);
     });
 };
@@ -175,6 +214,8 @@ export const {
   setUsers,
   setAccount,
   setUserPublishedProjects,
+  signOut,
+  setListCountries,
 } = users.actions;
 
 export default users.reducer;

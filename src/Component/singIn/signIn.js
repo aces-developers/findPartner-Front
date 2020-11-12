@@ -14,15 +14,15 @@ function Signin(props) {
       password: e.target.password.value,
     };
     await dispatch(SignIn(user));
-    await dispatch(setSession(props.users.token));
-    setTimeout(() => {
-      props.history.push("./");
-    }, 2000);
+    // await dispatch(setSession(props.users.token));
+    // setTimeout(() => {
+    //   props.history.push("./");
+    // }, 2000);
   };
 
   return (
     <>
-      <div className="signup-section " style={{ height: "70vh" }}>
+      <div className="signup-section" style={{ height: "70vh" }}>
         <Container className="signup-container">
           <Card className="text-center signup-card">
             <Card.Header className="signup-header"> Sign in </Card.Header>
@@ -35,7 +35,7 @@ function Signin(props) {
                   <Form.Control
                     name="username"
                     type="text"
-                    placeholder="ex: John@gmail.com"
+                    placeholder="ex: Elon musk"
                     className="mb-2"
                   />
                   <Form.Control

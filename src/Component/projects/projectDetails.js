@@ -38,7 +38,7 @@ function Details(props) {
                     <Card.Title
                       style={{ textTransform: "capitalize", color: "#333" }}
                     >
-                      {props.projectData[0].title}
+                      {props.projectData.title}
                     </Card.Title>
                     <Card.Text style={{ fontSize: 12, fontWeight: 300 }}>
                       <FontAwesomeIcon
@@ -46,10 +46,10 @@ function Details(props) {
                         className="mr-2"
                         style={{ color: "#00b4db" }}
                       />
-                      {props.projectData[0]._ownerName}
+                      {props.projectData._ownerName}
                     </Card.Text>
                     <hr></hr>
-                    <Card.Text>{props.projectData[0].description}</Card.Text>
+                    <Card.Text>{props.projectData.description}</Card.Text>
                     <Card.Text
                       className="mt-4"
                       style={{ textTransform: "capitalize" }}
@@ -59,7 +59,7 @@ function Details(props) {
                         className="mr-2"
                         style={{ color: "#f77d0e" }}
                       />
-                      {props.projectData[0].category}{" "}
+                      {props.projectData.category}
                     </Card.Text>
                   </Card.Body>
                 </Card>
@@ -69,10 +69,11 @@ function Details(props) {
             <Formik
               validationSchema={Schema}
               onSubmit={async (values, { setSubmitting }) => {
-                await dispatch(apply(props.location.state._id, values));
+                console.log("apply submit");
+                await dispatch(apply(_id, values));
                 //console.log('  isValid: state.users.isValid,', props.isValid);
                 setTimeout(() => {
-                  props.history.push("/");
+                  // props.history.push("/");
                 }, 4000);
               }}
               initialValues={{
