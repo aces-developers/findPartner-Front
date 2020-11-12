@@ -41,22 +41,21 @@ export default function SignIn(props) {
       <section className="aboutus-section">
         <h1> About us</h1>
       </section>
-      <section className="title-section">
-        <h1> Title</h1>
-        <p className="aboutproject">
-          <b> Find Partner is a place where people can: </b>
-          <br />
+      <section
+        className="title-section"
+        style={{ height: 300, backgroundColor: "#f7f7fe" }}
+      >
+        <h1> Find Partner</h1>
 
-          <ul className="about-list">
-            <li>
-              publish their projects to seek in a partner to share their vision.
-            </li>
-            <li>Place where people can have a look at emerging projects.</li>
-            <li>And apply for the project that matches their skills.</li>
-          </ul>
-        </p>
+        <br />
+        <div className="about-list">
+          Find Partner is a place where people can publish their projects to
+          seek in a partner to share their vision. Place where people can have a
+          look at emerging projects. And apply for the project that matches
+          their skills.
+        </div>
       </section>
-      <MDBCard className="my-5 px-5 pb-5 text-center">
+      <MDBCard className=" border-0 px-5 pb-5 text-center">
         <MDBCardBody>
           <h2 className="h1-responsive font-weight-bold my-5">Asec team</h2>
           <p className="grey-text w-responsive mx-auto mb-5">

@@ -7,39 +7,28 @@
 }
 .aboutus-section {
   text-align: center;
-  margin: 1% 0;
-  //border: 1px 0 0 0 solid black;
-  border-top: 1px solid black;
-  padding: 2% 0;
-  //background-color: rgb(46, 143, 240);
-  //background: linear-gradient(90deg, rgb(1, 213, 255) 0%, rgb(0, 132, 255) 100%, rgb(0, 0, 3) 100%);
+  color: #fff;
+  font-weight: 600;
+  height: 200px;
+  padding: 6% 0;
+  background: rgb(0, 180, 219);
   background: linear-gradient(
     90deg,
-    rgba(0, 212, 255, 1) 0%,
-    rgb(55, 195, 238) 15%,
-    rgb(35, 184, 238) 23%,
-    rgb(86, 195, 241) 31%,
-    rgb(107, 194, 238) 36%,
-    rgb(100, 173, 236) 55%,
-    rgb(106, 159, 224) 66%,
-    rgb(58, 58, 206) 100%,
-    rgba(2, 0, 36, 1) 100%
+    rgba(0, 180, 219, 1) 0%,
+    rgba(0, 103, 139, 1) 100%
   );
 }
+
 .title-section {
   text-align: center;
-  padding: 2% 10%;
-  margin: 1% 0;
+  padding: 6% 10%;
   //border: 1px solid black
 }
 .title-section p {
   text-align: center;
   padding: 0 11%;
-  margin: 1% 0;
   //border: 1px solid black
 }
 .about-list {
-  text-align: left;
-  margin-left: 30%;
-  list-style: none;
+  text-align: center;
 }
